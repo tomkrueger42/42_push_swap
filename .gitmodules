@@ -1,3 +1,0 @@
-[submodule "push_swap/libft"]
-	path = push_swap/libft
-	url = https://github.com/tomkr-01/42_libft.git
