@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/03 17:06:47 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/03 23:09:54 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /* includes */
 
-# include "libft.h"
+# include "./libft/includes/libft.h"
 # include <stdio.h>
 # include <stdbool.h>
 # include <limits.h>
@@ -58,13 +58,19 @@ typedef struct	s_head
 	struct s_node	*i;
 }				t_head;
 
-// when sorting strings, operations can't be stored in content :/
 typedef struct	s_node
 {
-	DATATYPE		content;
-	struct s_node	*next;
-	struct s_node	*prev;
+	struct s_content	*content;
+	struct s_node		*next;
+	struct s_node		*prev;
 }				t_node;
+
+// inst is for instructions, value for sorting
+typedef struct	s_content
+{
+	char		inst;
+	DATATYPE	value;
+}				t_content;
 
 /* push_swap.c */
 
@@ -82,7 +88,8 @@ void				revrotate(char c, struct s_head *head);
 
 /* list_handling.c */
 
-void				*insert_node_b4(struct s_node *next_node, DATATYPE content);
+struct s_content	*create_content(DATATYPE value, char inst);
+struct s_node		*insert_node_b4(struct s_node *next_node, struct s_content *content);
 int					error_free(char *errormsg, struct s_head *head);
 void				free_node(struct s_node *node);
 

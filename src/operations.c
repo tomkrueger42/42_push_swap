@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 18:01:15 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/03 16:25:45 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/03 23:07:06 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,29 @@
 
 void	swap(char c, struct s_head *head)
 {
+	struct s_content	*tmp;
+
 	if ((c == 'a' || c == 'A') && head->a != head->a->next /* && head->a != NULL */)
 	{
-		head->a->prev->next = head->a->next;
-		head->a->next->prev = head->a->prev;
-		head->a->next->next->prev = head->a;
-		head->a->next = head->a->next->next;
-		head->a->prev = head->a->prev->next;
-		head->a->prev->next = head->a;
+		tmp = head->a->content;
+		head->a->content = head->a->next->content;
+		head->a->next->content = tmp;
 		if (c == 'a')
-			head->i = insert_node_b4(head->i, SA);
+			head->i = insert_node_b4(head->i, create_content(0, SA));
 	}
 	else if ((c == 'b' || c == 'B') && head->b != head->b->next /* && head->b != NULL */)
 	{
-		head->b->prev->next = head->b->next;
-		head->b->next->prev = head->b->prev;
-		head->b->next->next->prev = head->b;
-		head->b->next = head->b->next->next;
-		head->b->prev = head->b->prev->next;
-		head->b->prev->next = head->b;
+		tmp = head->b->content;
+		head->b->content = head->b->next->content;
+		head->b->next->content = tmp;
 		if (c == 'b')
-			head->i = insert_node_b4(head->i, SB);
+			head->i = insert_node_b4(head->i, create_content(0, SB));
 	}
-	else if (c == 'c' /* && head->a != NULL && head->b != NULL */)
+	else if (c == 's')
 	{
 		swap('A', head);
 		swap('B', head);
-		head->i = insert_node_b4(head->i, SS);
+		head->i = insert_node_b4(head->i, create_content(0, SS));
 	}
 }
 
@@ -57,7 +53,7 @@ void	push(char c, struct s_head *head)
 		head->a->prev->next->next = head->a;
 		head->a->prev = head->a->prev->next;
 		head->a = head->a->prev;
-		head->i = insert_node_b4(head->i, PA);
+		head->i = insert_node_b4(head->i, create_content(0, PA));
 	}
 	else if (c == 'b'/*  && head->b != NULL */)
 	{
@@ -70,7 +66,7 @@ void	push(char c, struct s_head *head)
 		head->b->prev->next->next = head->b;
 		head->b->prev = head->b->prev->next;
 		head->b = head->b->prev;
-		head->i = insert_node_b4(head->i, PB);
+		head->i = insert_node_b4(head->i, create_content(0, PB));
 	}
 }
 
@@ -80,19 +76,19 @@ void	rotate(char c, struct s_head *head)
 	{
 		head->a = head->a->next;
 		if (c == 'a')
-			head->i = insert_node_b4(head->i, RA);
+			head->i = insert_node_b4(head->i, create_content(0, RA));
 	}
 	else if ((c == 'b' || c == 'B') /* && head->b != NULL */)
 	{
 		head->b = head->b->next;
 		if (c == 'b')
-			head->i = insert_node_b4(head->i, RB);
+			head->i = insert_node_b4(head->i, create_content(0, RB));
 	}
-	else if (c == 'c' /* && head->a != NULL && head->b != NULL */)
+	else if (c == 'r')
 	{
 		rotate('A', head);
 		rotate('B', head);
-		head->i = insert_node_b4(head->i, RR);
+		head->i = insert_node_b4(head->i, create_content(0, RR));
 	}
 }
 
@@ -102,18 +98,18 @@ void	revrotate(char c, struct s_head *head)
 	{
 		head->a = head->a->prev;
 		if (c == 'a')
-			head->i = insert_node_b4(head->i, RRA);
+			head->i = insert_node_b4(head->i, create_content(0, RRA));
 	}
 	else if ((c == 'b' || c == 'B') /* && head->b != NULL */)
 	{
 		head->b = head->b->prev;
 		if (c == 'a')
-			head->i = insert_node_b4(head->i, RRB);
+			head->i = insert_node_b4(head->i, create_content(0, RRB));
 	}
-	else if (c == 'c' /* && head->a != NULL && head->b != NULL */)
+	else if (c == 'r')
 	{
-		revrotate('a', head);
-		revrotate('b', head);
-		head->i = insert_node_b4(head->i, RRR);
+		revrotate('A', head);
+		revrotate('B', head);
+		head->i = insert_node_b4(head->i, create_content(0, RRR));
 	}
 }

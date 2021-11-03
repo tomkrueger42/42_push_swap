@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/03 16:24:51 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/03 23:09:35 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ int	main(int argc, char **argv)
 	head = malloc(sizeof(head));
 	if (head == NULL || !input_conversion(argc, argv, head))
 		return (0);
+	head->i = NULL;
+
+	/* CONTINUE WORKING ON PUSH OPERATION */
+	
 	//push('b', head);
 	print_go_brrrrr(head);
-	system("leaks push_swap");
+	//system("leaks push_swap");
 }
 
 struct s_head	*input_conversion(int argc, char **argv, struct s_head *head)
@@ -38,9 +42,9 @@ struct s_head	*input_conversion(int argc, char **argv, struct s_head *head)
 			return (NULL);
 		}
 		else if (head->a == NULL)
-			head->a = insert_node_b4(NULL, ft_atoi(*argv));
+			head->a = insert_node_b4(NULL, create_content(ft_atoi(*argv), 0));
 		else
-			head->a = insert_node_b4(head->a, ft_atoi(*argv));
+			head->a = insert_node_b4(head->a, create_content(ft_atoi(*argv), 0));
 		argv++;
 	}
 	rotate('A', head);
@@ -58,25 +62,25 @@ void	print_go_brrrrr(struct s_head *head)
 	b_parser = head->b != NULL ? head->b->next : NULL;
 	printf("stack a:\tstack b:\n");
 	if (head->a && head->b)
-		printf("%i\t\t| %i\n", head->a->content, head->b->content);
+		printf("%i\t\t| %i\n", head->a->content->value, head->b->content->value);
 	else if (head->a)
-		printf("%i\n", head->a->content);
+		printf("%i\n", head->a->content->value);
 	else if (head->b)
-		printf("\t\t| %i\n", head->b->content);
+		printf("\t\t| %i\n", head->b->content->value);
 	while (a_parser != head->a && b_parser != head->b && a_parser != NULL && b_parser != NULL)
 	{
-		printf("%i\t\t| %i\n", a_parser->content, b_parser->content);
+		printf("%i\t\t| %i\n", a_parser->content->value, b_parser->content->value);
 		a_parser = a_parser->next;
 		b_parser = b_parser->next;
 	}
 	while (a_parser != head->a && a_parser != NULL)
 	{
-		printf("%i\n", a_parser->content);
+		printf("%i\n", a_parser->content->value);
 		a_parser = a_parser->next;
 	}
 	while (b_parser != head->b && b_parser != NULL)
 	{
-		printf("\t\t| %i\n", b_parser->content);
+		printf("\t\t| %i\n", b_parser->content->value);
 		b_parser = b_parser->next;
 	}
 	//printf("\n%i instructions\n---------------\n", instruction_conversion((head->i != NULL ? head->i->prev : NULL), head->i));
@@ -89,27 +93,27 @@ int	instruction_conversion(struct s_node *parse, struct s_node *head_i)
 
 	while (parse != NULL && i != -2)
 	{
-		if (parse->content == SA)
+		if (parse->content->inst == SA)
 			ft_putstr_fd("sa\n", FILE_DESCRIPTOR);
-		else if (parse->content == SB)
+		else if (parse->content->inst == SB)
 			ft_putstr_fd("sb\n", FILE_DESCRIPTOR);
-		else if (parse->content == SS)
+		else if (parse->content->inst == SS)
 			ft_putstr_fd("ss\n", FILE_DESCRIPTOR);
-		else if (parse->content == PA)
+		else if (parse->content->inst == PA)
 			ft_putstr_fd("pa\n", FILE_DESCRIPTOR);
-		else if (parse->content == PB)
+		else if (parse->content->inst == PB)
 			ft_putstr_fd("pb\n", FILE_DESCRIPTOR);
-		else if (parse->content == RA)
+		else if (parse->content->inst == RA)
 			ft_putstr_fd("ra\n", FILE_DESCRIPTOR);
-		else if (parse->content == RB)
+		else if (parse->content->inst == RB)
 			ft_putstr_fd("rb\n", FILE_DESCRIPTOR);
-		else if (parse->content == RR)
+		else if (parse->content->inst == RR)
 			ft_putstr_fd("rr\n", FILE_DESCRIPTOR);
-		else if (parse->content == RRA)
+		else if (parse->content->inst == RRA)
 			ft_putstr_fd("rra\n", FILE_DESCRIPTOR);
-		else if (parse->content == RRB)
+		else if (parse->content->inst == RRB)
 			ft_putstr_fd("rrb\n", FILE_DESCRIPTOR);
-		else if (parse->content == RRR)
+		else if (parse->content->inst == RRR)
 			ft_putstr_fd("rrr\n", FILE_DESCRIPTOR);
 		i++;
 		parse = parse->prev;
