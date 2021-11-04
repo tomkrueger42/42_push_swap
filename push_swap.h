@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/03 23:09:54 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/04 15:46:45 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct	s_node
 	struct s_node		*prev;
 }				t_node;
 
-// inst is for instructions, value for sorting
+// inst is for instruction stack, value for sorting
 typedef struct	s_content
 {
 	char		inst;
@@ -83,6 +83,7 @@ int					instruction_conversion(struct s_node *parse, struct s_node *head);
 
 void				swap(char c, struct s_head *head);
 void				push(char c, struct s_head *head);
+struct s_node		*push_it(struct s_node *src, struct s_node *dst);
 void				rotate(char c, struct s_head *head);
 void				revrotate(char c, struct s_head *head);
 

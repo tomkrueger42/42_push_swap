@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 18:01:15 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/03 23:07:06 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/04 15:48:26 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,30 +44,35 @@ void	push(char c, struct s_head *head)
 {
 	if (c == 'a' /* && head->a != NULL */)
 	{
-		head->a->prev->next = head->b;
-		head->b = head->b->next;
-		head->b->prev = head->b->prev->prev;
-		head->b->prev->next = head->b;
-		head->a->prev->next->next = head->a;
-		head->a->prev->next->prev = head->a->prev;
-		head->a->prev->next->next = head->a;
-		head->a->prev = head->a->prev->next;
-		head->a = head->a->prev;
+		head->a = push_it(head->a, head->b);
 		head->i = insert_node_b4(head->i, create_content(0, PA));
 	}
 	else if (c == 'b'/*  && head->b != NULL */)
 	{
-		head->b->prev->next = head->a;
-		head->a = head->a->next;
-		head->a->prev = head->a->prev->prev;
-		head->a->prev->next = head->a;
-		head->b->prev->next->next = head->b;
-		head->b->prev->next->prev = head->b->prev;
-		head->b->prev->next->next = head->b;
-		head->b->prev = head->b->prev->next;
-		head->b = head->b->prev;
+		head->b = push_it(head->b, head->a);
 		head->i = insert_node_b4(head->i, create_content(0, PB));
 	}
+}
+
+struct s_node	*push_it(struct s_node *src, struct s_node *dst)
+{
+	if (dst == NULL)
+	{
+		
+	}
+	else
+	{
+		dst->prev->next = src;
+		src = src->next;
+		src->prev = src->prev->prev;
+		src->prev->next = src;
+		dst->prev->next->next = dst;
+		dst->prev->next->prev = dst->prev;
+		dst->prev->next->next = dst;
+		dst->prev = dst->prev->next;
+		dst = dst->prev;
+	}
+	return (dst);
 }
 
 void	rotate(char c, struct s_head *head)
