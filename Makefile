@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+         #
+#    By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 14:28:19 by tkruger           #+#    #+#              #
-#    Updated: 2021/11/03 22:22:28 by tkruger          ###   ########.fr        #
+#    Updated: 2021/11/07 19:16:55 by tomkrueger       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,9 @@ SRC = ./src/push_swap.c ./src/list_handling.c ./src/operations.c
 #		Libs
 # **************************************************************************** #
 
-LIBDIR = libft
-LIB = -L./libft -lft
-INC = -I./libft
+LIBDIR = libs/libft
+LIB = -L./$(LIBDIR) -lft
+INC = -I./$(LIBDIR)
 # for LIB: either -l:libft.a or -lft same same
 # will have to copy libft into the intra repo for evaluation!!!
 

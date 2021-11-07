@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/03 23:09:35 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/07 20:07:48 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../includes/push_swap.h"
 
 int	main(int argc, char **argv)
 {
@@ -23,7 +23,12 @@ int	main(int argc, char **argv)
 
 	/* CONTINUE WORKING ON PUSH OPERATION */
 	
-	//push('b', head);
+	push('b', head);
+	push('b', head);
+	push('b', head);
+	push('b', head);
+	push('b', head);
+	push('b', head);
 	print_go_brrrrr(head);
 	//system("leaks push_swap");
 }
@@ -60,16 +65,16 @@ void	print_go_brrrrr(struct s_head *head)
 
 	a_parser = head->a != NULL ? head->a->next : NULL;
 	b_parser = head->b != NULL ? head->b->next : NULL;
-	printf("stack a:\tstack b:\n");
+	printf("stack a: | stack b:\n");
 	if (head->a && head->b)
-		printf("%i\t\t| %i\n", head->a->content->value, head->b->content->value);
+		printf("%i\t | %i\n", head->a->content->value, head->b->content->value);
 	else if (head->a)
 		printf("%i\n", head->a->content->value);
 	else if (head->b)
-		printf("\t\t| %i\n", head->b->content->value);
+		printf("\t | %i\n", head->b->content->value);
 	while (a_parser != head->a && b_parser != head->b && a_parser != NULL && b_parser != NULL)
 	{
-		printf("%i\t\t| %i\n", a_parser->content->value, b_parser->content->value);
+		printf("%i \t | %i\n", a_parser->content->value, b_parser->content->value);
 		a_parser = a_parser->next;
 		b_parser = b_parser->next;
 	}
@@ -80,7 +85,7 @@ void	print_go_brrrrr(struct s_head *head)
 	}
 	while (b_parser != head->b && b_parser != NULL)
 	{
-		printf("\t\t| %i\n", b_parser->content->value);
+		printf("\t | %i\n", b_parser->content->value);
 		b_parser = b_parser->next;
 	}
 	//printf("\n%i instructions\n---------------\n", instruction_conversion((head->i != NULL ? head->i->prev : NULL), head->i));

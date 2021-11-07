@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/04 15:46:45 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/07 19:52:29 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /* includes */
 
-# include "./libft/includes/libft.h"
+# include "../libs/libft/includes/libft.h"
 # include <stdio.h>
 # include <stdbool.h>
 # include <limits.h>
@@ -83,7 +83,7 @@ int					instruction_conversion(struct s_node *parse, struct s_node *head);
 
 void				swap(char c, struct s_head *head);
 void				push(char c, struct s_head *head);
-struct s_node		*push_it(struct s_node *src, struct s_node *dst);
+struct s_node		*push_it(struct s_node **src, struct s_node **dst);
 void				rotate(char c, struct s_head *head);
 void				revrotate(char c, struct s_head *head);
 
