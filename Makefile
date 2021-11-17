@@ -6,7 +6,7 @@
 #    By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 14:28:19 by tkruger           #+#    #+#              #
-#    Updated: 2021/11/17 17:41:47 by tkruger          ###   ########.fr        #
+#    Updated: 2021/11/17 21:58:33 by tkruger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ FLAGS = -Wall -Werror -Wextra -o
 #		SRC
 # **************************************************************************** #
 
-SRC = ./src/push_swap.c ./src/list_handling.c ./src/operations.c ./src/snake.c
+SRC = ./src/push_swap.c ./src/list_handling.c ./src/operations.c ./src/snake.c\
+		./src/sort.c
 
 # **************************************************************************** #
 #		Libs

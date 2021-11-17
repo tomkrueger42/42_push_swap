@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/16 19:15:18 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/11/17 17:53:44 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 		return (0);
 	head->i = NULL;
 
-	best_snake(head);
+	big_snake_ahhh(head);
 	print_go_brrrrr(head);
 	//error_free("does it free?\nlet's see!\n", head);
 	//system("leaks push_swap");

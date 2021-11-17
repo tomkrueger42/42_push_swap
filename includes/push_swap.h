@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/17 17:46:01 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/17 22:10:52 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,13 @@ void				free_node(struct s_node *node);
 
 /* snake.c */
 
-void				best_snake(struct s_head *head);
 int					find_snake(struct s_node *start);
-void				snake_cage(int snake_start, int snake_len, struct s_head *head);
+void				big_snake_ahhh(struct s_head *head);
+void				snake_in_isolation(int snake_start, int snake_len, struct s_head *head);
+
+/* sort.c */
+
+void				push_sorted(char c, struct s_head *head);
+int					find_right_slot(char c, struct s_node *node, struct s_head *head);
 
 #endif
