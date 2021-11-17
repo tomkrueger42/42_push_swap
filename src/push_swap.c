@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/07 20:07:48 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/11/16 19:15:18 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,9 @@ int	main(int argc, char **argv)
 		return (0);
 	head->i = NULL;
 
-	/* CONTINUE WORKING ON PUSH OPERATION */
-	
-	push('b', head);
-	push('b', head);
-	push('b', head);
-	push('b', head);
-	push('b', head);
-	push('b', head);
+	best_snake(head);
 	print_go_brrrrr(head);
+	//error_free("does it free?\nlet's see!\n", head);
 	//system("leaks push_swap");
 }
 
@@ -120,13 +114,10 @@ int	instruction_conversion(struct s_node *parse, struct s_node *head_i)
 			ft_putstr_fd("rrb\n", FILE_DESCRIPTOR);
 		else if (parse->content->inst == RRR)
 			ft_putstr_fd("rrr\n", FILE_DESCRIPTOR);
-		i++;
+		i = i == -1 ? -2 : i + 1;
 		parse = parse->prev;
 		if (parse == head_i)
 			i = -1;
-		else if (i == -1)
-			i = -2;
 	}
-	
 	return (i);
 }

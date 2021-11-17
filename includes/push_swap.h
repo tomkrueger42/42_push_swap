@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/07 19:52:29 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/11/16 19:53:40 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,15 @@ void				revrotate(char c, struct s_head *head);
 
 /* list_handling.c */
 
+int					lst_size(struct s_node *start);
 struct s_content	*create_content(DATATYPE value, char inst);
 struct s_node		*insert_node_b4(struct s_node *next_node, struct s_content *content);
 int					error_free(char *errormsg, struct s_head *head);
 void				free_node(struct s_node *node);
+
+/* snake.c */
+
+void				best_snake(struct s_head *head);
+int					find_snake(struct s_node *start);
 
 #endif

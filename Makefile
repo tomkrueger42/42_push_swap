@@ -6,7 +6,7 @@
 #    By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 14:28:19 by tkruger           #+#    #+#              #
-#    Updated: 2021/11/07 19:16:55 by tomkrueger       ###   ########.fr        #
+#    Updated: 2021/11/16 19:52:39 by tomkrueger       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 #		general
 # **************************************************************************** #
 
-INPT = "6 5 4 3 2 1"
+INPT = "2 3 5 6 1 4"
 NAME = push_swap
 CC = gcc
 FLAGS = -Wall -Werror -Wextra -o
@@ -23,7 +23,7 @@ FLAGS = -Wall -Werror -Wextra -o
 #		SRC
 # **************************************************************************** #
 
-SRC = ./src/push_swap.c ./src/list_handling.c ./src/operations.c
+SRC = ./src/push_swap.c ./src/list_handling.c ./src/operations.c ./src/snake.c
 
 # **************************************************************************** #
 #		Libs
