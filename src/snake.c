@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:05:40 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/11/17 14:34:49 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/17 17:45:12 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,40 +32,49 @@ void best_snake(struct s_head *head)
 		parser = parser->next;
 		i++;
 	}
-
-	printf("snake_start:\t%i\n", snake_start);
-	printf("snake_len:\t%i\n", snake_len);
-	if (snake_start + snake_len > lst_size(head->a))
-	{
-		while (snake_start + snake_len > lst_size(head->a) && snake_start--)
-			rotate('a', head);
-		while (snake_start > 0 && snake_start--)
-			push('b', head);
-	}
-	if (snake_start + snake_len < lst_size(head->a))
-	{
-		while (snake_start + snake_len < lst_size(head->a) && snake_start++)
-			revrotate('a', head);
-		while (snake_start > 0 && snake_start--)
-			push('b', head);
-	}
-	printf("snake_start:\t%i\n", snake_start);
-	printf("snake_len:\t%i\n", snake_len);
+	snake_cage(snake_start, snake_len, head);
 }
 
 int find_snake(struct s_node *start)
 {
-	struct s_node *parser;
-	int i;
+	struct s_node	*parser;
+	int				i;
 
 	parser = start;
 	i = 1;
-	printf("start->content->value: %i\n", start->content->value);
-	while (parser->content->value < parser->next->content->value ||
-		parser->content->value < start->content->value)
+	while (parser->content->value < parser->next->content->value)
+	{
+		i++;
+		parser = parser->next;
+	}
+	if (parser->next->content->value < start->content->value)
+	{
+		i++;
+		parser = parser->next;
+	}
+	while (parser->content->value < parser->next->content->value &&
+		parser->next->content->value < start->content->value)
 	{
 		i++;
 		parser = parser->next;
 	}
 	return (i);
+}
+
+void	snake_cage(int snake_start, int snake_len, struct s_head *head)
+{
+	if (snake_start + snake_len > lst_size(head->a))
+	{
+		while (snake_start + snake_len > lst_size(head->a) && snake_start-- >= 0)
+			rotate('a', head);
+		while (snake_start > 0 && snake_start-- >= 0)
+			push('b', head);
+	}
+	if (snake_start + snake_len < lst_size(head->a))
+	{
+		while (snake_start + snake_len < lst_size(head->a) && snake_start++ >= 0)
+			revrotate('a', head);
+		while (snake_start > 0 && snake_start-- >= 0)
+			push('b', head);
+	}
 }
