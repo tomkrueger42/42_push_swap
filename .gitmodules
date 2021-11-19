@@ -1,1 +1,4 @@
 
+[submodule "libs/42_libft"]
+	path = libs/42_libft
+	url = https://github.com/tomkr-01/42_libft.git
