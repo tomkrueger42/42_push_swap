@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_handling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:43:18 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/09 13:39:26 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/11/22 17:53:52 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,18 @@ struct s_node	*insert_node_b4(struct s_node *prev_node, struct s_content *conten
 /* This function frees the stack and puts an error message to FILE_DESCRIPTOR */
 int	error_free(char *errormsg, struct s_head *head)
 {
-	while (head->a->next != NULL)
+	if (head->a && 0)
+		printf("cause of unused parameter error msg\n");
+	/* while (head->a->next != NULL)
 	{
-		/* printf("head->a: %p\n", head->a);
-		printf("prev->a: %p\n", head->a->next);
-		printf("prev->a: %p\n", head->a->prev); */
+		//printf("head->a: %p\n", head->a);
+		//printf("prev->a: %p\n", head->a->next);
+		//printf("prev->a: %p\n", head->a->prev);
 		head->a = head->a->next;
-		/* printf("head->a: %p\n", head->a);
-		printf("prev->a: %p\n", head->a->next);
-		printf("prev->a: %p\n", head->a->prev); */
-		free_node(head->a->prev);
+		//printf("head->a: %p\n", head->a);
+		//printf("prev->a: %p\n", head->a->next);
+		//printf("prev->a: %p\n", head->a->prev);
+		//free_node(head->a->prev);
 	}
 	while (head->b != NULL)
 	{
@@ -95,7 +97,7 @@ int	error_free(char *errormsg, struct s_head *head)
 	{
 		free(head);
 		head = NULL;
-	}
+	} */
 	ft_putstr_fd(errormsg, FILE_DESCRIPTOR);
 	return (1);
 }

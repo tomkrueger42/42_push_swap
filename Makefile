@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+         #
+#    By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 14:28:19 by tkruger           #+#    #+#              #
-#    Updated: 2021/11/21 19:53:51 by tomkrueger       ###   ########.fr        #
+#    Updated: 2021/11/22 17:54:47 by tkruger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 #		general
 # **************************************************************************** #
 
-INPT = "10 2 9 5 3 2 6 4 7 8"
+INPT = "27 26 25 24 23 22 21 28 62 14 0 -33 95 -1"
 NAME = push_swap
 CC = gcc
 FLAGS = -Wall -Werror -Wextra -o
@@ -24,13 +24,13 @@ FLAGS = -Wall -Werror -Wextra -o
 # **************************************************************************** #
 
 SRC = ./src/push_swap.c ./src/list_handling.c ./src/operations.c ./src/snake.c\
-		./src/sort.c
+		./src/sort.c ./src/merge.c
 
 # **************************************************************************** #
 #		Libs
 # **************************************************************************** #
 
-LIBDIR = libs/42_libft
+LIBDIR = libs/libft
 LIB = -L./$(LIBDIR) -lft
 INC = -I./$(LIBDIR)
 # for LIB: either -l:libft.a or -lft same same

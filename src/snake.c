@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   snake.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:05:40 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/11/22 10:35:49 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/11/22 15:02:01 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ int find_snake(struct s_node *start)
 	i = 1;
 	while (parser->content->value < parser->next->content->value)
 	{
-		i++;
 		parser = parser->next;
+		i++;
 	}
 	if (parser->next->content->value < start->content->value)
 	{
-		i++;
 		parser = parser->next;
+		i++;
 	}
 	while (parser->content->value < parser->next->content->value &&
 		parser->next->content->value < start->content->value)
 	{
-		i++;
 		parser = parser->next;
+		i++;
 	}
 	return (i);
 }

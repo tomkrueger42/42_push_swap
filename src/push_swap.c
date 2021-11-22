@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/17 17:53:44 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/22 18:05:10 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	main(int argc, char **argv)
 	head->i = NULL;
 
 	big_snake_ahhh(head);
+	//print_go_brrrrr(head);
+	merge_to_stack_a(head);
 	print_go_brrrrr(head);
 	//error_free("does it free?\nlet's see!\n", head);
 	//system("leaks push_swap");
@@ -48,8 +50,29 @@ struct s_head	*input_conversion(int argc, char **argv, struct s_head *head)
 	}
 	rotate('A', head);
 	argv = NULL;
+	/* if (check_doubles(head))
+		return (NULL); */
 	return (head);
 }
+/* 
+int	check_doubles(struct s_head *head)
+{
+	int	i;
+	int	j;
+	struct s_node	*node1;
+	struct s_node	*node2;
+	
+
+	i = 0;
+	j = 1;
+	while (i < lst_size(head->a))
+	{
+		while (j < lst_size(head->a))
+		{
+			
+		}
+	}
+} */
 
 /* This function prints out stacks a & b and the instruction stack to stdout */
 void	print_go_brrrrr(struct s_head *head)
@@ -82,42 +105,49 @@ void	print_go_brrrrr(struct s_head *head)
 		printf("\t | %i\n", b_parser->content->value);
 		b_parser = b_parser->next;
 	}
-	//printf("\n%i instructions\n---------------\n", instruction_conversion((head->i != NULL ? head->i->prev : NULL), head->i));
+	printf("%i instructions\n---------------\n", put_inst(head));
+}
+
+/* This function loops through head->i and sends elements to instruction_conversion() */
+int	put_inst(struct s_head *head)
+{
+	struct s_node	*parser;
+	int				i;
+
+	parser = head->i->next;
+	i = 0;
+	while (parser != NULL && (parser != head->i->next || i == 0))
+	{
+		//instruction_conversion(parser);
+		parser = parser->next;
+		i++;
+	}
+	return (i);
 }
 
 /* This function converts int back into instructions and writes them to the fd */
-int	instruction_conversion(struct s_node *parse, struct s_node *head_i)
+void	instruction_conversion(struct s_node *parser)
 {
-	int	i = 0;
-
-	while (parse != NULL && i != -2)
-	{
-		if (parse->content->inst == SA)
+		if (parser->content->inst == SA)
 			ft_putstr_fd("sa\n", FILE_DESCRIPTOR);
-		else if (parse->content->inst == SB)
+		else if (parser->content->inst == SB)
 			ft_putstr_fd("sb\n", FILE_DESCRIPTOR);
-		else if (parse->content->inst == SS)
+		else if (parser->content->inst == SS)
 			ft_putstr_fd("ss\n", FILE_DESCRIPTOR);
-		else if (parse->content->inst == PA)
+		else if (parser->content->inst == PA)
 			ft_putstr_fd("pa\n", FILE_DESCRIPTOR);
-		else if (parse->content->inst == PB)
+		else if (parser->content->inst == PB)
 			ft_putstr_fd("pb\n", FILE_DESCRIPTOR);
-		else if (parse->content->inst == RA)
+		else if (parser->content->inst == RA)
 			ft_putstr_fd("ra\n", FILE_DESCRIPTOR);
-		else if (parse->content->inst == RB)
+		else if (parser->content->inst == RB)
 			ft_putstr_fd("rb\n", FILE_DESCRIPTOR);
-		else if (parse->content->inst == RR)
+		else if (parser->content->inst == RR)
 			ft_putstr_fd("rr\n", FILE_DESCRIPTOR);
-		else if (parse->content->inst == RRA)
+		else if (parser->content->inst == RRA)
 			ft_putstr_fd("rra\n", FILE_DESCRIPTOR);
-		else if (parse->content->inst == RRB)
+		else if (parser->content->inst == RRB)
 			ft_putstr_fd("rrb\n", FILE_DESCRIPTOR);
-		else if (parse->content->inst == RRR)
+		else if (parser->content->inst == RRR)
 			ft_putstr_fd("rrr\n", FILE_DESCRIPTOR);
-		i = i == -1 ? -2 : i + 1;
-		parse = parse->prev;
-		if (parse == head_i)
-			i = -1;
-	}
-	return (i);
 }

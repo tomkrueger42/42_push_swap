@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/22 14:03:18 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/22 18:05:24 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,10 @@ typedef struct	s_content
 
 int					main(int argc, char **argv);
 struct s_head		*input_conversion(int argc, char **argv, struct s_head *head);
+/* int					check_doubles(int new, struct s_head *head); */
 void				print_go_brrrrr(struct s_head *head);
-int					instruction_conversion(struct s_node *parse, struct s_node *head);
+int					put_inst(struct s_head *head);
+void				instruction_conversion(struct s_node *parse);
 
 /* operations.c */
 
@@ -107,5 +109,9 @@ void				push_sorted(char c, struct s_head *head);
 int					find_right_slot(char c, struct s_node *node, struct s_head *head);
 int					first_slot(char c, struct s_node *node, struct s_head *head);
 int					snake_break(char c, struct s_node *node);
+
+/* merge.c */
+
+void				merge_to_stack_a(struct s_head *head);
 
 #endif
