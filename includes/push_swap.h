@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/17 22:10:52 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/22 11:18:51 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /* includes */
 
-# include "../libs/libft/includes/libft.h"
+# include "../libs/42_libft/includes/libft.h"
 # include <stdio.h>
 # include <stdbool.h>
 # include <limits.h>
@@ -105,5 +105,7 @@ void				snake_in_isolation(int snake_start, int snake_len, struct s_head *head);
 
 void				push_sorted(char c, struct s_head *head);
 int					find_right_slot(char c, struct s_node *node, struct s_head *head);
+int					first_slot(char c, struct s_node *node, struct s_head *head);
+int					snake_break(char c, struct s_node *node);
 
 #endif

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   snake.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:05:40 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/11/17 22:20:28 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/22 10:35:49 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
+/* This function returns the length of a snake */
 int find_snake(struct s_node *start)
 {
 	struct s_node	*parser;
@@ -38,7 +39,7 @@ int find_snake(struct s_node *start)
 	return (i);
 }
 
-/* This function saves the attributes of the longest snake */
+/* This function finds the longest snake and calls snake_in_isolation() */
 void big_snake_ahhh(struct s_head *head)
 {
 	struct s_node *parser;
@@ -62,6 +63,7 @@ void big_snake_ahhh(struct s_head *head)
 	snake_in_isolation(snake_start, snake_len, head);
 }
 
+/* This function isolates a snake on stack->a */
 void	snake_in_isolation(int snake_start, int snake_len, struct s_head *head)
 {
 	if (snake_start + snake_len > lst_size(head->a))
