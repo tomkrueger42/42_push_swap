@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:48:39 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/22 11:18:34 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/11/22 11:21:42 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	push_sorted(char c, struct s_head *head)
 	return (-1);
 } */
 
-
 int	find_right_slot(char c, struct s_node *node, struct s_head *head)
 {
 	struct s_node	*parser;
@@ -96,9 +95,7 @@ int	first_slot(char c, struct s_node *node, struct s_head *head)
 /* This function returns either 0 or 1 wether or not s_node *node the start of a snake is */
 int	snake_break(char c, struct s_node *node)
 {
-	if (c == 'a' && node->content->value < node->prev->content->value)
-		return (1);
-	else if (c == 'b' && node->content->value > node->prev->content->value)
+	if (c == 'b' && node->content->value > node->prev->content->value)
 		return (1);
 	return (0);
 }
