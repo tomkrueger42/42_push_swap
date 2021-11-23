@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:48:39 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/22 18:13:27 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/23 14:59:29 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	push_sorted(char c, struct s_head *head)
 	if (c == 'a')
 	{
 		i = find_right_slot(c, head->b, head);
-		//printf("i = %i\n", i);
+		/* printf("i = %i\n", i); */
 		while (i > 0 && i--)
 		{
 			rotate(c, head);
@@ -31,30 +31,23 @@ void	push_sorted(char c, struct s_head *head)
 		//	printf("revrotate\n");
 		}
 		push(c, head);
-		/* find new longest possible snake after each push('b')!! for greater efficiency!! */
-		// the following two lines are needed 'cause find_right_slot() still has its difficulties with 2 nodes on one stack
-		if (lst_size(head->a) == 2 && head->a->content->value > head->a->next->content->value)
-			swap(c, head);
-		//print_go_brrrrr(head);
 	}
 	if (c == 'b')
 	{
 		i = find_right_slot(c, head->a, head);
-		while (i < 0 && i++)
+		/* printf("i = %i\n", i); */
+		while (i > 0 && i--)
 		{
 			rotate(c, head);
 			//printf("rotate\n");
 		}
-		while (i > 0 && i--)
+		while (i < 0 && i++)
 		{
 			revrotate(c, head);
 			//printf("revrotate\n");
 		}
 		push(c, head);
 		/* find new longest possible snake after each push('b')!! for greater efficiency!! */
-		// the following two lines are needed 'cause find_right_slot() still has its difficulties with 2 nodes on one stack
-		if (lst_size(head->b) == 2 && head->b->content->value < head->b->next->content->value)
-			swap(c, head);
 	}
 	//print_go_brrrrr(head);
 }
@@ -65,7 +58,7 @@ int	find_right_slot(char c, struct s_node *node, struct s_head *head)
 	struct s_node	*parser;
 	int				i;
 
-	i = 1;
+	i = 0;
 	print_go_brrrrr(head);
 	if (first_slot(c, node, head))
 	{
@@ -81,17 +74,18 @@ int	find_right_slot(char c, struct s_node *node, struct s_head *head)
 		parser = head->b;
 	while (c == 'a' && (parser != node || i == 0))
 	{
-		sleep(1);
-		printf("infinite\n");
-		if ((node->content->value > parser->prev->content->value && (node->content->value < parser->content->value)) || /* snake_break(c, parser))) ||  */(node->content->value < parser->content->value && snake_break(c, parser)))
+		/* if (i % 10 == 0)
+			sleep(1);
+		printf("infinite\n"); */
+		if ((node->content->value > parser->prev->content->value && (node->content->value < parser->content->value)) || (node->content->value < parser->content->value && snake_break(c, parser)) || (node->content->value > parser->prev->content->value && snake_break(c, parser)))
 			return ((i < lst_size(head->a) / 2 ? i : -(lst_size(head->a) - i)));
 		parser = parser->next;
 		i++;
 	}
-	while (c == 'b' && (parser != node || i == 1))
+	while (c == 'b' && (parser != node || i == 0))
 	{
-		printf("loop?\n");
-		if (node->content->value < parser->content->value && (node->content->value > parser->next->content->value || snake_break(c, parser)))
+		/* printf("loop?\n"); */
+		if ((node->content->value < parser->prev->content->value && (node->content->value > parser->content->value)) || (node->content->value > parser->content->value && snake_break(c, parser)) || (node->content->value < parser->prev->content->value && snake_break(c, parser)))
 			return ((i < lst_size(head->b) / 2 ? i : -(lst_size(head->b) - i)));
 		parser = parser->next;
 		i++;
