@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:48:39 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/23 14:59:29 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/23 18:38:50 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,37 +19,26 @@ void	push_sorted(char c, struct s_head *head)
 	if (c == 'a')
 	{
 		i = find_right_slot(c, head->b, head);
-		/* printf("i = %i\n", i); */
 		while (i > 0 && i--)
 		{
 			rotate(c, head);
-		//	printf("rotate\n");
 		}
 		while (i < 0 && i++)
 		{
 			revrotate(c, head);
-		//	printf("revrotate\n");
 		}
 		push(c, head);
 	}
 	if (c == 'b')
 	{
 		i = find_right_slot(c, head->a, head);
-		/* printf("i = %i\n", i); */
 		while (i > 0 && i--)
-		{
 			rotate(c, head);
-			//printf("rotate\n");
-		}
 		while (i < 0 && i++)
-		{
 			revrotate(c, head);
-			//printf("revrotate\n");
-		}
 		push(c, head);
 		/* find new longest possible snake after each push('b')!! for greater efficiency!! */
 	}
-	//print_go_brrrrr(head);
 }
 
 /* This function finds the right slot for *node in *head */
@@ -59,34 +48,26 @@ int	find_right_slot(char c, struct s_node *node, struct s_head *head)
 	int				i;
 
 	i = 0;
-	print_go_brrrrr(head);
 	if (first_slot(c, node, head))
 	{
-		//printf("shit is going sideways here\n");
+		//i = 0;
 		return (0);
 	}
 	if (c == 'a')
-	{
 		parser = head->a;
-		i = 0;
-	}
 	else if (c == 'b')
 		parser = head->b;
 	while (c == 'a' && (parser != node || i == 0))
 	{
-		/* if (i % 10 == 0)
-			sleep(1);
-		printf("infinite\n"); */
 		if ((node->content->value > parser->prev->content->value && (node->content->value < parser->content->value)) || (node->content->value < parser->content->value && snake_break(c, parser)) || (node->content->value > parser->prev->content->value && snake_break(c, parser)))
-			return ((i < lst_size(head->a) / 2 ? i : -(lst_size(head->a) - i)));
+			return (i <= lst_size(head->a) / 2 ? i : -(lst_size(head->a) - i));
 		parser = parser->next;
 		i++;
 	}
 	while (c == 'b' && (parser != node || i == 0))
 	{
-		/* printf("loop?\n"); */
 		if ((node->content->value < parser->prev->content->value && (node->content->value > parser->content->value)) || (node->content->value > parser->content->value && snake_break(c, parser)) || (node->content->value < parser->prev->content->value && snake_break(c, parser)))
-			return ((i < lst_size(head->b) / 2 ? i : -(lst_size(head->b) - i)));
+			return (i <= lst_size(head->b) / 2 ? i : -(lst_size(head->b) - i));
 		parser = parser->next;
 		i++;
 	}

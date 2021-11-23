@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/22 18:05:10 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/23 18:26:39 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ int	main(int argc, char **argv)
 	head->i = NULL;
 
 	big_snake_ahhh(head);
-	//print_go_brrrrr(head);
 	merge_to_stack_a(head);
-	print_go_brrrrr(head);
+	(void)put_inst(head);
 	//error_free("does it free?\nlet's see!\n", head);
 	//system("leaks push_swap");
 }
@@ -118,7 +117,7 @@ int	put_inst(struct s_head *head)
 	i = 0;
 	while (parser != NULL && (parser != head->i->next || i == 0))
 	{
-		//instruction_conversion(parser);
+		instruction_conversion(parser);
 		parser = parser->next;
 		i++;
 	}

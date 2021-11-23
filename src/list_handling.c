@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:43:18 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/22 17:53:52 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/23 18:21:23 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	lst_size(struct s_node *start)
 	parser = start->next;
 	while (parser != start)
 	{
-		i++;
 		parser = parser->next;
+		i++;
 	}
 	return (i);
 }

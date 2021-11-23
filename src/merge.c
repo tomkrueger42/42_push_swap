@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 14:06:29 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/23 15:18:25 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/23 18:24:39 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,16 @@ void	merge_to_stack_a(struct s_head *head)
 	struct s_node	*parser;
 	int				i;
 
-	parser = head->a;
-	i = -1;
+	i = 0;
 	while (head->b != NULL)
 		push_sorted('a', head);
-	while (parser->content->value < parser->next->content->value)
+	parser = head->a;
+	while (parser->content->value > parser->prev->content->value)
 	{
 		parser = parser->next;
 		i++;
 	}
-	/* printf("i = %i\n", i);
-	printf("a = %i\n", lst_size(head->a)); */
-	i = i < lst_size(head->a) / 2 ? i : -(lst_size(head->a) - i);
-	/* printf("i = %i\n", i); */
+	i = i <= lst_size(head->a) / 2 ? i : -(lst_size(head->a) - i);
 	while (i > 0 && i--)
 		rotate('a', head);
 	while (i < 0 && i++)
