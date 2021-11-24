@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:05:40 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/11/24 17:35:03 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/24 19:29:56 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,25 @@
 /* This function returns the length of a snake */
 int find_snake(struct s_node *start)
 {
-	struct s_node	*parser;
-	int				i;
+	struct s_node		*parser;
+	struct s_content	*benchmark;
+	int					i;
 
 	parser = start;
-	i = 1;
-	while (parser->content->value < parser->next->content->value)
+	benchmark = start->content;
+	//printf("start value: %i\n", start->content->value);
+	i = 0;
+	while (parser != start || i++ == 0)
+	{
+		if (benchmark->value < parser->content->value)
+		{
+			//printf("in snake: %i\n", parser->content->value);
+			benchmark = parser->content;
+			i++;
+		}
+		parser = parser->next;
+	}
+	/* while (parser->content->value < parser->next->content->value)
 	{
 		parser = parser->next;
 		i++;
@@ -35,23 +48,25 @@ int find_snake(struct s_node *start)
 	{
 		parser = parser->next;
 		i++;
-	}
-	return (i);
+	} */
+	return (--i);
 }
 
 /* This function finds the longest snake and calls snake_in_isolation() */
 void big_snake_ahhh(struct s_head *head)
 {
-	struct s_node *parser;
-	int snake_len;
-	int snake_start;
-	int i;
+	struct s_node		*parser;
+	struct s_content	*benchmark;
+	int					snake_len;
+	int					snake_start;
+	int					i;
 
 	parser = head->a;
 	snake_len = 0;
 	i = 0;
 	while (parser != head->a || i == 0)
 	{
+		//printf("c\n");
 		if (snake_len < find_snake(parser))
 		{
 			snake_len = find_snake(parser);
@@ -60,7 +75,43 @@ void big_snake_ahhh(struct s_head *head)
 		parser = parser->next;
 		i++;
 	}
-	snake_in_isolation(snake_start, snake_len, head);
+
+	printf("snake_start:\t%i\n", snake_start);
+	printf("snake_len:\t%i\n", snake_len);
+
+	if (snake_start <= lst_size(head->a) / 2)
+	{
+		while (snake_start > 0)
+		{
+			printf("a\n");
+			rotate('a', head);
+			snake_start--;
+		}
+	}
+	else
+	{
+		while (snake_start < lst_size(head->a))
+		{
+			printf("b\n");
+			revrotate('a', head);
+			snake_start++;
+		}
+		snake_start = 0;
+	}
+	parser = head->a->next;
+	benchmark = head->a->content;
+	while (parser != head->a)
+	{
+		rotate('a', head);
+		if (benchmark->value > parser->content->value)
+		{
+			push_sorted('b', head);
+		}
+		benchmark = parser->content;
+		parser = parser->next;
+	}
+	print_go_brrrrr(head);
+	//snake_in_isolation(snake_start, snake_len, head);
 }
 
 /* This function isolates a snake on stack->a */

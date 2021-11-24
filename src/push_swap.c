@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/24 17:32:20 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/24 18:07:58 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int argc, char **argv)
 
 	big_snake_ahhh(head);
 	merge_to_stack_a(head);
-	//printf("%i\n", lst_size(head->i));
 	(void)put_inst(head);
 	//print_go_brrrrr(head);
 	//error_free("does it free?\nlet's see!\n", head);

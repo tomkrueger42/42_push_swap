@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/24 17:04:00 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/24 18:10:27 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include "../libs/libft/includes/libft.h"
 # include <stdio.h>
+# include <time.h>
 
 /* change the following for sorting other datatypes */
 
