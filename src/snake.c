@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:05:40 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/11/22 15:02:01 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/24 17:35:03 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,16 @@ void big_snake_ahhh(struct s_head *head)
 /* This function isolates a snake on stack->a */
 void	snake_in_isolation(int snake_start, int snake_len, struct s_head *head)
 {
-	if (snake_start + snake_len > lst_size(head->a))
+	if (snake_start + snake_len <= lst_size(head->a))
 	{
-		while (snake_start + snake_len > lst_size(head->a) && snake_start-- >= 0)
+		while (snake_start + snake_len < lst_size(head->a) && snake_start++ >= 0)
 			rotate('a', head);
 		while (snake_start > 0 && snake_start-- >= 0)
 			push_sorted('b', head);
 	}
-	if (snake_start + snake_len < lst_size(head->a))
+	if (snake_start + snake_len > lst_size(head->a))
 	{
-		while (snake_start + snake_len < lst_size(head->a) && snake_start++ >= 0)
+		while (snake_start + snake_len > lst_size(head->a) && snake_start-- >= 0)
 			revrotate('a', head);
 		while (snake_start > 0 && snake_start-- >= 0)
 			push_sorted('b', head);

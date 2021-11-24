@@ -1,5 +1,7 @@
 # push_swap executable
 push_swap
+checker
+push_swap_tester
 
 # Prerequisites
 *.d

@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:48:39 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/23 18:38:50 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/24 16:49:20 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ int	find_right_slot(char c, struct s_node *node, struct s_head *head)
 
 	i = 0;
 	if (first_slot(c, node, head))
-	{
-		//i = 0;
 		return (0);
-	}
 	if (c == 'a')
 		parser = head->a;
 	else if (c == 'b')
@@ -78,6 +75,7 @@ int	find_right_slot(char c, struct s_node *node, struct s_head *head)
 the first slot of *head */
 int	first_slot(char c, struct s_node *node, struct s_head *head)
 {
+	//printf("node: %p\n", node);
 	if (c == 'a' && (lst_size(head->a) <= 1 || ((node->content->value < head->a->content->value && snake_break(c, head->a))/*  || (node->content->value > head->a->prev->content->value && snake_break(c, head->a)) */)))
 		return (1);
 	else if (c == 'b' && (lst_size(head->b) <= 1 || ((node->content->value > head->b->content->value && snake_break(c, head->b)) || (node->content->value < head->b->prev->content->value && snake_break(c, head->b)))))
