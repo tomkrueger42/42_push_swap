@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:05:40 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/11/24 19:29:56 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/25 16:56:12 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void big_snake_ahhh(struct s_head *head)
 	i = 0;
 	while (parser != head->a || i == 0)
 	{
-		//printf("c\n");
 		if (snake_len < find_snake(parser))
 		{
 			snake_len = find_snake(parser);
@@ -76,14 +75,14 @@ void big_snake_ahhh(struct s_head *head)
 		i++;
 	}
 
-	printf("snake_start:\t%i\n", snake_start);
-	printf("snake_len:\t%i\n", snake_len);
+	if (snake_len == lst_size(head->a))
+		return ;
 
+// some weird rotations in the beginning cause it is trying to find the lis beginning and then rotates to first non-ordered element
 	if (snake_start <= lst_size(head->a) / 2)
 	{
 		while (snake_start > 0)
 		{
-			printf("a\n");
 			rotate('a', head);
 			snake_start--;
 		}
@@ -92,25 +91,27 @@ void big_snake_ahhh(struct s_head *head)
 	{
 		while (snake_start < lst_size(head->a))
 		{
-			printf("b\n");
 			revrotate('a', head);
 			snake_start++;
 		}
 		snake_start = 0;
 	}
-	parser = head->a->next;
+	parser = head->a;
 	benchmark = head->a->content;
+	rotate('a', head);
 	while (parser != head->a)
 	{
-		rotate('a', head);
-		if (benchmark->value > parser->content->value)
+		if (benchmark->value > head->a->content->value)
 		{
 			push_sorted('b', head);
 		}
-		benchmark = parser->content;
-		parser = parser->next;
+		else
+		{
+			benchmark = head->a->content;
+			rotate('a', head);
+		}
 	}
-	print_go_brrrrr(head);
+	//print_go_brrrrr(head);
 	//snake_in_isolation(snake_start, snake_len, head);
 }
 
@@ -131,4 +132,31 @@ void	snake_in_isolation(int snake_start, int snake_len, struct s_head *head)
 		while (snake_start > 0 && snake_start-- >= 0)
 			push_sorted('b', head);
 	}
+}
+
+int	part_of_lis(struct s_node *lis_start, struct s_node *node)
+{
+	struct s_node	*parser;
+	struct s_content	*benchmark;
+
+	parser = lis_start->next;
+	benchmark = lis_start->content->value;
+	while (parser != node)
+	{
+		if (benchmark->value < parser->content->value)
+		{
+			benchmark = parser->content;
+		}
+		parser = parser->next;
+	}
+	if (benchmark->value <=)
+}
+
+int	value_at(struct s_node *node, int pos)
+{
+	while (pos-- > 0)
+	{
+		node = node->next;
+	}
+	return (node->content->value);
 }

@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/24 18:07:58 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/25 16:16:58 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	main(int argc, char **argv)
 
 	big_snake_ahhh(head);
 	merge_to_stack_a(head);
-	(void)put_inst(head);
 	//print_go_brrrrr(head);
+	(void)put_inst(head);
 	//error_free("does it free?\nlet's see!\n", head);
 	//system("leaks push_swap");
 }
@@ -105,7 +105,7 @@ void	print_go_brrrrr(struct s_head *head)
 		printf("\t | %i\n", b_parser->content->value);
 		b_parser = b_parser->next;
 	}
-	//printf("%i instructions\n---------------\n", put_inst(head));
+	printf("%i instructions\n---------------\n", lst_size(head->i));
 }
 
 /* This function loops through head->i and sends elements to instruction_conversion() */
