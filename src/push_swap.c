@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/29 21:47:59 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/11/30 00:35:28 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ int	main(int argc, char **argv)
 		return (0);
 	head->i = NULL;
 
+	assign_indeces(head);
 	(void)lis(head);
 	merge_to_stack_a(head);
-	//print_go_brrrrr(head);
+	print_go_brrrrr(head);
 	(void)put_inst(head);
 	//error_free("does it free?\nlet's see!\n", head);
 	//system("leaks push_swap");
@@ -74,15 +75,36 @@ int	check_doubles(struct s_head *head)
 	}
 } */
 
-/* void	assign_index(struct s_head *head)
+void	assign_indeces(struct s_head *head)
 {
-	int	i;
-	int	j;
+	struct s_node	*parser;
+	struct s_node	*lowest;
+	int				i;
+	int				j;
 
 	i = 0;
-	j = 0;
-	while ()
-} */
+	head->a->index = -1;
+	parser = head->a->next;
+	while (parser != head->a)
+	{
+		parser->index = -1;
+		parser = parser->next;
+	}
+	while (i < lst_size(head->a))
+	{
+		lowest = NULL;
+		j = 0;
+		while (j < lst_size(head->a))
+		{
+			if ((lowest == NULL || lowest->content->value >= parser->content->value) && parser->index == -1)
+				lowest = parser;
+			parser = parser->next;
+			j++;
+		}
+		lowest->index = i;
+		i++;
+	}
+}
 
 /* This function prints out stacks a & b and the instruction stack to stdout */
 void	print_go_brrrrr(struct s_head *head)
@@ -96,7 +118,7 @@ void	print_go_brrrrr(struct s_head *head)
 	if (head->a && head->b)
 		printf("%i\t | %i\n", head->a->content->value, head->b->content->value);
 	else if (head->a)
-		printf("%i\n", head->a->content->value);
+		printf("index: %i; %i\n", head->a->index, head->a->content->value);
 	else if (head->b)
 		printf("\t | %i\n", head->b->content->value);
 	while (a_parser != head->a && b_parser != head->b && a_parser != NULL && b_parser != NULL)
@@ -107,7 +129,7 @@ void	print_go_brrrrr(struct s_head *head)
 	}
 	while (a_parser != head->a && a_parser != NULL)
 	{
-		printf("%i\n", a_parser->content->value);
+		printf("index: %i; %i\n", a_parser->index, a_parser->content->value);
 		a_parser = a_parser->next;
 	}
 	while (b_parser != head->b && b_parser != NULL)

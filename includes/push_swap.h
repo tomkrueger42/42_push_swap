@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/26 13:46:45 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/11/30 00:09:01 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct	s_head
 typedef struct	s_node
 {
 	struct s_content	*content;
+	int					index;
 	struct s_node		*next;
 	struct s_node		*prev;
 }				t_node;
@@ -75,6 +76,7 @@ typedef struct	s_content
 int					main(int argc, char **argv);
 struct s_head		*input_conversion(int argc, char **argv, struct s_head *head);
 /* int					check_doubles(int new, struct s_head *head); */
+void				assign_indeces(struct s_head *head);
 void				print_go_brrrrr(struct s_head *head);
 int					put_inst(struct s_head *head);
 void				instruction_conversion(struct s_node *parse);
