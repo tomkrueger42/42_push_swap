@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/25 16:16:58 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/29 21:47:59 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 		return (0);
 	head->i = NULL;
 
-	big_snake_ahhh(head);
+	(void)lis(head);
 	merge_to_stack_a(head);
 	//print_go_brrrrr(head);
 	(void)put_inst(head);
@@ -72,6 +72,16 @@ int	check_doubles(struct s_head *head)
 			
 		}
 	}
+} */
+
+/* void	assign_index(struct s_head *head)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while ()
 } */
 
 /* This function prints out stacks a & b and the instruction stack to stdout */

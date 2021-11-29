@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:48:39 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/25 14:33:57 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/26 14:28:43 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	push_sorted(char c, struct s_head *head)
 		while (i < 0 && i++)
 			revrotate(c, head);
 		push(c, head);
-		/* find new longest possible snake after each push('b')!! for greater efficiency!! */
 	}
 }
 

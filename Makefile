@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+         #
+#    By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 14:28:19 by tkruger           #+#    #+#              #
-#    Updated: 2021/11/25 16:00:11 by tkruger          ###   ########.fr        #
+#    Updated: 2021/11/29 21:29:29 by tomkrueger       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,7 @@
 #		general
 # **************************************************************************** #
 
-#INPT = "4 67 3 87 23 1000 -10000 10"
-INPT = "4 67 3 87 23 1000 -10000 10 2"
+INPT = "`ruby -e "puts (0..7).to_a.shuffle.join(' ')"`"
 NAME = push_swap
 CC = gcc
 FLAGS = -Wall -Werror -Wextra -o
@@ -24,7 +23,7 @@ FLAGS = -Wall -Werror -Wextra -o
 #		SRC
 # **************************************************************************** #
 
-SRC = ./src/push_swap.c ./src/list_handling.c ./src/operations.c ./src/snake.c\
+SRC = ./src/push_swap.c ./src/list_handling.c ./src/operations.c ./src/lis.c\
 		./src/sort.c ./src/merge.c
 
 # **************************************************************************** #
@@ -61,7 +60,7 @@ fclean:	clean
 re:	fclean all
 
 run:
-	./$(NAME) $(INPT)
+	bash check.sh
 
 rerun: re run
 

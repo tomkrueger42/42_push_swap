@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/25 16:47:49 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/11/26 13:46:45 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ struct s_node		*insert_node_b4(struct s_node *next_node, struct s_content *conte
 int					error_free(char *errormsg, struct s_head *head);
 void				free_node(struct s_node *node);
 
-/* snake.c */
+/* lis.c */
 
-int					find_snake(struct s_node *start);
-void				big_snake_ahhh(struct s_head *head);
-void				snake_in_isolation(int snake_start, int snake_len, struct s_head *head);
+int					increasing_subsequence(struct s_node *lis_start);
+int					lis(struct s_head *head);
+int					part_of_lis(struct s_node *lis_start, struct s_node *node);
 int					value_at(struct s_node *node, int pos);
 
 /* sort.c */
