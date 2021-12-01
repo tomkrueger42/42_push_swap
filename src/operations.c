@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 18:01:15 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/01 01:39:56 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/01 13:54:57 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	revrotate(char c, struct s_head *head)
 	else if ((c == 'b' || c == 'B') /* && head->b != NULL */)
 	{
 		head->b = head->b->prev;
-		if (c == 'a')
+		if (c == 'b')
 			head->i = insert_node_b4(head->i, (DATATYPE)0, RRB);
 	}
 	else if (c == 'r')
