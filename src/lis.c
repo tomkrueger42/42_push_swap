@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:05:40 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/11/26 13:54:29 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/01 02:14:46 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,17 @@ int lis(struct s_head *head)
 int increasing_subsequence(struct s_node *lis_start)
 {
 	struct s_node		*parser;
-	struct s_content	*benchmark;
+	int					benchmark;
 	int					i;
 
 	parser = lis_start;
-	benchmark = lis_start->content;
+	benchmark = lis_start->index;
 	i = 0;
 	while (parser != lis_start || i++ == 0)
 	{
-		if (benchmark->value < parser->content->value)
+		if (benchmark < parser->index)
 		{
-			benchmark = parser->content;
+			benchmark = parser->index;
 			i++;
 		}
 		parser = parser->next;
@@ -71,32 +71,22 @@ int increasing_subsequence(struct s_node *lis_start)
 int	part_of_lis(struct s_node *lis_start, struct s_node *node)
 {
 	struct s_node		*parser;
-	struct s_content	*benchmark;
+	int					benchmark;
 
 	parser = lis_start->next;
-	benchmark = lis_start->content;
+	benchmark = lis_start->index;
 	if (lis_start == node)
 		return (1);
 	while (parser != node)
 	{
-		if (benchmark->value <= parser->content->value)
+		if (benchmark <= parser->index)
 		{
-			benchmark = parser->content;
+			benchmark = parser->index;
 		}
 		parser = parser->next;
 	}
-	if (benchmark->value <= node->content->value)
+	if (benchmark <= node->index)
 		return (1);
 	else
 		return (0);
-}
-
-/* This function returns the value of the content element *node */
-int	value_at(struct s_node *node, int pos)
-{
-	while (pos-- > 0)
-	{
-		node = node->next;
-	}
-	return (node->content->value);
 }

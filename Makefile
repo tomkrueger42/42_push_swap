@@ -6,7 +6,7 @@
 #    By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 14:28:19 by tkruger           #+#    #+#              #
-#    Updated: 2021/11/29 21:29:29 by tomkrueger       ###   ########.fr        #
+#    Updated: 2021/12/01 02:04:17 by tomkrueger       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@
 #		general
 # **************************************************************************** #
 
-INPT = "`ruby -e "puts (0..7).to_a.shuffle.join(' ')"`"
+INPT = "4 67 100000 3 87 23 1000 -10000 10 2"
+#INPT = "`ruby -e "puts (0..7).to_a.shuffle.join(' ')"`"
 NAME = push_swap
 CC = gcc
 FLAGS = -Wall -Werror -Wextra -o

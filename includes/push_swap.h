@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/30 00:09:01 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/01 02:16:25 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,24 +58,16 @@ typedef struct	s_head
 
 typedef struct	s_node
 {
-	struct s_content	*content;
+	DATATYPE			content;
 	int					index;
 	struct s_node		*next;
 	struct s_node		*prev;
 }				t_node;
 
-// inst is for instruction stack, value for sorting
-typedef struct	s_content
-{
-	char		inst;
-	DATATYPE	value;
-}				t_content;
-
 /* push_swap.c */
 
 int					main(int argc, char **argv);
 struct s_head		*input_conversion(int argc, char **argv, struct s_head *head);
-/* int					check_doubles(int new, struct s_head *head); */
 void				assign_indeces(struct s_head *head);
 void				print_go_brrrrr(struct s_head *head);
 int					put_inst(struct s_head *head);
@@ -92,10 +84,9 @@ void				revrotate(char c, struct s_head *head);
 /* list_handling.c */
 
 int					lst_size(struct s_node *start);
-struct s_content	*create_content(DATATYPE value, char inst);
-struct s_node		*insert_node_b4(struct s_node *next_node, struct s_content *content);
+struct s_node		*insert_node_b4(struct s_node *next_node, /* struct s_content *content */ DATATYPE content, int index);
 int					error_free(char *errormsg, struct s_head *head);
-void				free_node(struct s_node *node);
+//void				free_node(struct s_node *node);
 
 /* lis.c */
 
@@ -107,9 +98,8 @@ int					value_at(struct s_node *node, int pos);
 /* sort.c */
 
 void				push_sorted(char c, struct s_head *head);
-int					find_right_slot(char c, struct s_node *node, struct s_head *head);
-int					first_slot(char c, struct s_node *node, struct s_head *head);
-int					snake_break(char c, struct s_node *node);
+int					find_right_position(char c, struct s_node *node, struct s_head *head);
+int					lis_break(char c, struct s_node *node);
 
 /* merge.c */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_handling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:43:18 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/23 18:21:23 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/01 02:14:28 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,8 @@ int	lst_size(struct s_node *start)
 	return (i);
 }
 
-/* This function creates a content element */
-struct s_content	*create_content(DATATYPE value, char inst)
-{
-	struct s_content	*new;
-
-	new = malloc(sizeof(struct s_content));
-	if (new == NULL)
-		return (NULL);
-	new->value = value;
-	new->inst = inst;
-	return (new);
-}
-
 /* This function inserts a new node b4 prev_node */
-struct s_node	*insert_node_b4(struct s_node *prev_node, struct s_content *content)
+struct s_node	*insert_node_b4(struct s_node *prev_node, int content, int index)
 {
 	struct s_node	*new;
 
@@ -63,6 +50,7 @@ struct s_node	*insert_node_b4(struct s_node *prev_node, struct s_content *conten
 		new->prev->next = new;
 		new->next->prev = new;
 	}
+	new->index = index;
 	new->content = content;
 	return (new);
 }
@@ -103,7 +91,7 @@ int	error_free(char *errormsg, struct s_head *head)
 }
 
 /* This function frees a node and its content element */
-void	free_node(struct s_node *node)
+/* void	free_node(struct s_node *node)
 {
 	if (node != NULL)
 	{
@@ -115,3 +103,4 @@ void	free_node(struct s_node *node)
 		node->next = NULL;
 	}
 }
+ */

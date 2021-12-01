@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 14:06:29 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/23 18:24:39 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/01 01:27:09 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	merge_to_stack_a(struct s_head *head)
 	while (head->b != NULL)
 		push_sorted('a', head);
 	parser = head->a;
-	while (parser->content->value > parser->prev->content->value)
+	while (parser->index > parser->prev->index)
 	{
 		parser = parser->next;
 		i++;

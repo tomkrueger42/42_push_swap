@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:48:39 by tkruger           #+#    #+#             */
-/*   Updated: 2021/11/26 14:28:43 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/01 02:19:00 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	push_sorted(char c, struct s_head *head)
 
 	if (c == 'a')
 	{
-		i = find_right_slot(c, head->b, head);
+		i = find_right_position(c, head->b, head);
 		while (i > 0 && i--)
 		{
 			rotate(c, head);
@@ -29,9 +29,9 @@ void	push_sorted(char c, struct s_head *head)
 		}
 		push(c, head);
 	}
-	if (c == 'b')
+	else if (c == 'b')
 	{
-		i = find_right_slot(c, head->a, head);
+		i = find_right_position(c, head->a, head);
 		while (i > 0 && i--)
 			rotate(c, head);
 		while (i < 0 && i++)
@@ -40,29 +40,30 @@ void	push_sorted(char c, struct s_head *head)
 	}
 }
 
-/* This function finds the right slot for *node in *head */
-int	find_right_slot(char c, struct s_node *node, struct s_head *head)
+/* This function finds the right position for *node in *head */
+int	find_right_position(char c, struct s_node *node, struct s_head *head)
 {
 	struct s_node	*parser;
 	int				i;
 
 	i = 0;
-	if (first_slot(c, node, head))
-		return (0);
 	if (c == 'a')
 		parser = head->a;
 	else if (c == 'b')
 		parser = head->b;
 	while (c == 'a' && (parser != node || i == 0))
 	{
-		if ((node->content->value > parser->prev->content->value && (node->content->value < parser->content->value)) || (node->content->value < parser->content->value && snake_break(c, parser)) || (node->content->value > parser->prev->content->value && snake_break(c, parser)))
+		if (lst_size(head->a) <= 1 || (parser->prev->index < node->index && node->index < parser->index) || ((parser->prev->index < node->index || node->index < parser->index) && lis_break(c, parser)))
 			return (i <= lst_size(head->a) / 2 ? i : -(lst_size(head->a) - i));
 		parser = parser->next;
 		i++;
 	}
 	while (c == 'b' && (parser != node || i == 0))
 	{
-		if ((node->content->value < parser->prev->content->value && (node->content->value > parser->content->value)) || (node->content->value > parser->content->value && snake_break(c, parser)) || (node->content->value < parser->prev->content->value && snake_break(c, parser)))
+		//
+		// somehow my algorithm is still fucked up; example input: python3 pyviz.py 30 60 100 20 80 50 90 -10 40 10
+		//
+		if (lst_size(head->b) <= 1 || (parser->prev->index > node->index && node->index > parser->index) || ((parser->prev->index > node->index || node->index > parser->index) && lis_break(c, parser)))
 			return (i <= lst_size(head->b) / 2 ? i : -(lst_size(head->b) - i));
 		parser = parser->next;
 		i++;
@@ -70,25 +71,13 @@ int	find_right_slot(char c, struct s_node *node, struct s_head *head)
 	return (0);
 }
 
-/* This function returns either 0 or 1 wether or not *node can be pushed into 
-the first slot of *head */
-int	first_slot(char c, struct s_node *node, struct s_head *head)
-{
-	//printf("node: %p\n", node);
-	if (c == 'a' && (lst_size(head->a) <= 1 || ((node->content->value < head->a->content->value && snake_break(c, head->a))/*  || (node->content->value > head->a->prev->content->value && snake_break(c, head->a)) */)))
-		return (1);
-	else if (c == 'b' && (lst_size(head->b) <= 1 || ((node->content->value > head->b->content->value && snake_break(c, head->b)) || (node->content->value < head->b->prev->content->value && snake_break(c, head->b)))))
-		return (1);
-	return (0);
-}
-
 /* This function returns either 0 or 1 wether or not s_node *node the start of 
 a snake is */
-int	snake_break(char c, struct s_node *node)
+int	lis_break(char c, struct s_node *node)
 {
-	if (c == 'a' && node->content->value < node->prev->content->value)
+	if (c == 'a' && node->index < node->prev->index)
 		return (1);
-	if (c == 'b' && node->content->value > node->prev->content->value)
+	if (c == 'b' && node->index > node->prev->index)
 		return (1);
 	return (0);
 }
