@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:43:18 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/02 00:23:53 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/03 02:47:55 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,34 +58,39 @@ struct s_node	*insert_node_b4(struct s_node *prev_node, int content, int index)
 /* This function frees the stack and puts an error message to FILE_DESCRIPTOR */
 int	error_free(char *errormsg, struct s_head *head)
 {
-	if (head->a && 0)
-		printf("cause of unused parameter error msg\n");
-	/* while (head->a->next != NULL)
+	struct s_node	*node;
+	
+	while (head->a != NULL)
 	{
-		//printf("head->a: %p\n", head->a);
-		//printf("prev->a: %p\n", head->a->next);
-		//printf("prev->a: %p\n", head->a->prev);
+		printf("head->a: %p\n", head->a);
+		printf("h->a->n: %p\n", head->a->next);
+		node = head->a;
 		head->a = head->a->next;
-		//printf("head->a: %p\n", head->a);
-		//printf("prev->a: %p\n", head->a->next);
-		//printf("prev->a: %p\n", head->a->prev);
-		//free_node(head->a->prev);
+		node->next = NULL;
+		node->prev = NULL;
+		free(node);
 	}
-	while (head->b != NULL)
+	if (head->a != NULL)
 	{
+		head->a->next = NULL;
+		head->a->prev = NULL;
+		free(head->a);
+	}
+	while (head->b != NULL && head->b->next != NULL && head->b != head->b->next)
+	{
+		printf("head->b: %p\n", head->b);
+		printf("h->b->n: %p\n", head->b->next);
 		head->b = head->b->next;
-		free_node(head->b->prev);
+		head->b->prev->next = NULL;
+		head->b->prev->prev = NULL;
+		free(head->b->prev);
 	}
-	while (head->i != NULL)
+	if (head->b != NULL)
 	{
-		head->i = head->i->next;
-		free_node(head->i->prev);
+		head->b->next = NULL;
+		head->b->prev = NULL;
+		free(head->b);
 	}
-	if (head != NULL)
-	{
-		free(head);
-		head = NULL;
-	} */
 	ft_putstr_fd(errormsg, FILE_DESCRIPTOR);
 	return (1);
 }

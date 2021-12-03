@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:05:40 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/12/03 01:47:37 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/03 02:20:50 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int lis(struct s_head *head)
 	int					lis_len;
 	int					i;
 
+	lis_len = 0;
 	parser = head->a;
 	lis_len = 0;
 	i = 0;
@@ -32,6 +33,7 @@ int lis(struct s_head *head)
 		}
 		parser = parser->next;
 	}
+	//system("leaks push_swap");
 	while (lst_size(head->a) > lis_len)
 	{
 		make_this_efficient(lis_start, head);
@@ -55,8 +57,7 @@ int lis(struct s_head *head)
 	printf("B_rotate_r = %i\n", B_rotate_r);
 	printf("B_rev_rotate_r = %i\n", B_rev_rotate_r);
 	printf("B_delta = %i\n", B_delta);
-	printf("B_rev_delta = %i\n", B_rev_delta);
-	printf("the fuck is this shit\n"); */
+	printf("B_rev_delta = %i\n", B_rev_delta); */
 	
 void	make_this_efficient(struct s_node *lis_start, struct s_head *head)
 {
@@ -77,10 +78,9 @@ void	make_this_efficient(struct s_node *lis_start, struct s_head *head)
 	int				B_rev_rotate_r;
 	int				B_delta;
 	int				B_rev_delta;
-	int				i;
 
 	parser = head->a;
-	i = 0;
+	rotate_a = 0;
 	B_rotate_a = 0;
 	B_rev_rotate_a = 0;
 	B_rotate_b = 0;
@@ -89,11 +89,10 @@ void	make_this_efficient(struct s_node *lis_start, struct s_head *head)
 	B_rev_rotate_r = 0;
 	B_delta = INT32_MAX;
 	B_rev_delta = INT32_MAX;
-	while (parser != head->a || i == 0)
+	while (parser != head->a || rotate_a == 0)
 	{
 		if (part_of_lis(lis_start, parser) == 0)
 		{
-			rotate_a = i;
 			rev_rotate_a = rotate_a == 0 ? 0 : lst_size(head->a) - rotate_a;
 			rotate_b = find_right_position('b', parser, head);
 			rev_rotate_b = rotate_b == 0 ? 0 : lst_size(head->b) - rotate_b;
@@ -116,7 +115,7 @@ void	make_this_efficient(struct s_node *lis_start, struct s_head *head)
 				B_rev_delta = rev_delta;
 			}
 		}
-		i++;
+		rotate_a++;
 		parser = parser->next;
 	}
 	if (B_rotate_r + B_delta <= B_rev_rotate_r + B_rev_delta)

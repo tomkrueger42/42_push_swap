@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/03 01:36:47 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/03 02:20:47 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	main(int argc, char **argv)
 	assign_indeces(head);
 	(void)lis(head);
 	merge_to_stack_a(head);
-	//print_go_brrrrr(head);
 	(void)put_inst(head);
-	//error_free("does it free?\nlet's see!\n", head);
+	//print_go_brrrrr(head);
+	error_free("does it free?\nlet's see!\n", head);
 	//system("leaks push_swap");
 }
 
