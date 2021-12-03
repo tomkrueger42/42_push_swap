@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/01 02:15:38 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/03 01:36:47 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,28 +90,28 @@ void	print_go_brrrrr(struct s_head *head)
 	b_parser = head->b != NULL ? head->b->next : NULL;
 	printf("stack a: | stack b:\n");
 	if (head->a && head->b)
-		printf("%i\t | %i\n", head->a->content, head->b->content);
+		printf("%i\t | %i\n", head->a->index, head->b->index);
 	else if (head->a)
-		printf("index: %i; %i\n", head->a->index, head->a->content);
+		printf("%i\n", head->a->index);
 	else if (head->b)
-		printf("\t | %i\n", head->b->content);
+		printf("\t | %i\n", head->b->index);
 	while (a_parser != head->a && b_parser != head->b && a_parser != NULL && b_parser != NULL)
 	{
-		printf("%i \t | %i\n", a_parser->content, b_parser->content);
+		printf("%i \t | %i\n", a_parser->index, b_parser->index);
 		a_parser = a_parser->next;
 		b_parser = b_parser->next;
 	}
 	while (a_parser != head->a && a_parser != NULL)
 	{
-		printf("index: %i; %i\n", a_parser->index, a_parser->content);
+		printf("%i\n", a_parser->index);
 		a_parser = a_parser->next;
 	}
 	while (b_parser != head->b && b_parser != NULL)
 	{
-		printf("\t | %i\n", b_parser->content);
+		printf("\t | %i\n", b_parser->index);
 		b_parser = b_parser->next;
 	}
-	printf("%i instructions\n---------------\n", lst_size(head->i));
+	printf("%i instructions\n---------------\n",lst_size(head->i));
 }
 
 /* This function loops through head->i and sends elements to instruction_conversion() */

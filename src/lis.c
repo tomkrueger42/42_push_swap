@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:05:40 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/12/01 02:14:46 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/03 01:47:37 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,124 @@ int lis(struct s_head *head)
 		}
 		parser = parser->next;
 	}
-	i = 0;
-	parser = head->a;
-	while ((head->a != parser || i++ == 0) && lst_size(head->a) > lis_len)
+	while (lst_size(head->a) > lis_len)
 	{
-		if (part_of_lis(lis_start, head->a))
-			rotate('a', head);
-		else
-			push_sorted('b', head);
-			lis_len = lis(head);
+		make_this_efficient(lis_start, head);
 	}
 	return (lis_len);
+}
+
+/* 	printf("rotate_a = %i\n", rotate_a);
+	printf("rev_rotate_a = %i\n", rev_rotate_a);
+	printf("rotate_b = %i\n", rotate_b);
+	printf("rev_rotate_b = %i\n", rev_rotate_b);
+	printf("rotate_r = %i\n", rotate_r);
+	printf("rev_rotate_r = %i\n", rev_rotate_r);
+	printf("delta = %i\n", delta);
+	printf("rev_delta = %i\n", rev_delta);
+	printf("i = %i\n", i);
+	printf("B_rotate_a = %i\n", B_rotate_a);
+	printf("B_rev_rotate_a = %i\n", B_rev_rotate_a);
+	printf("B_rotate_b = %i\n", B_rotate_b);
+	printf("B_rev_rotate_b = %i\n", B_rev_rotate_b);
+	printf("B_rotate_r = %i\n", B_rotate_r);
+	printf("B_rev_rotate_r = %i\n", B_rev_rotate_r);
+	printf("B_delta = %i\n", B_delta);
+	printf("B_rev_delta = %i\n", B_rev_delta);
+	printf("the fuck is this shit\n"); */
+	
+void	make_this_efficient(struct s_node *lis_start, struct s_head *head)
+{
+	struct s_node	*parser;
+	int				rotate_a;
+	int				rev_rotate_a;
+	int				rotate_b;
+	int				rev_rotate_b;
+	int				rotate_r;
+	int				rev_rotate_r;
+	int				delta;
+	int				rev_delta;
+	int				B_rotate_a;
+	int				B_rev_rotate_a;
+	int				B_rotate_b;
+	int				B_rev_rotate_b;
+	int				B_rotate_r;
+	int				B_rev_rotate_r;
+	int				B_delta;
+	int				B_rev_delta;
+	int				i;
+
+	parser = head->a;
+	i = 0;
+	B_rotate_a = 0;
+	B_rev_rotate_a = 0;
+	B_rotate_b = 0;
+	B_rev_rotate_b = 0;
+	B_rotate_r = 0;
+	B_rev_rotate_r = 0;
+	B_delta = INT32_MAX;
+	B_rev_delta = INT32_MAX;
+	while (parser != head->a || i == 0)
+	{
+		if (part_of_lis(lis_start, parser) == 0)
+		{
+			rotate_a = i;
+			rev_rotate_a = rotate_a == 0 ? 0 : lst_size(head->a) - rotate_a;
+			rotate_b = find_right_position('b', parser, head);
+			rev_rotate_b = rotate_b == 0 ? 0 : lst_size(head->b) - rotate_b;
+			rotate_r = rotate_a < rotate_b ? rotate_a : rotate_b;
+			rev_rotate_r = rev_rotate_a < rev_rotate_b ? rev_rotate_a : rev_rotate_b;
+			delta = rotate_a < rotate_b ? rotate_b - rotate_a : rotate_a - rotate_b;
+			rev_delta = rev_rotate_a < rev_rotate_b ? rev_rotate_b - rev_rotate_a : rev_rotate_a - rev_rotate_b;
+			if (rotate_r + delta <= rev_rotate_r + rev_delta && rotate_r + delta < B_rotate_r + B_delta)
+			{
+				B_rotate_a = rotate_a;
+				B_rotate_b = rotate_b;
+				B_rotate_r = rotate_r;
+				B_delta = delta;
+			}
+			if (rotate_r + delta > rev_rotate_r + rev_delta && rev_rotate_r + rev_delta < B_rev_rotate_r + B_rev_delta)
+			{
+				B_rev_rotate_a = rev_rotate_a;
+				B_rev_rotate_b = rev_rotate_b;
+				B_rev_rotate_r = rev_rotate_r;
+				B_rev_delta = rev_delta;
+			}
+		}
+		i++;
+		parser = parser->next;
+	}
+	if (B_rotate_r + B_delta <= B_rev_rotate_r + B_rev_delta)
+	{
+		while (B_rotate_r-- > 0)
+		{
+			rotate('r', head);
+		}
+		while (B_rotate_a > B_rotate_b && B_delta-- > 0)
+		{
+			rotate('a', head);
+		}
+		while (B_rotate_b > B_rotate_a && B_delta-- > 0)
+		{
+			rotate('b', head);
+		}
+	}
+	else if (B_rotate_r + B_delta > B_rev_rotate_r + B_rev_delta)
+	{
+		while (B_rev_rotate_r-- > 0)
+		{
+			revrotate('r', head);
+		}
+		while (B_rev_rotate_a > B_rev_rotate_b && B_rev_delta-- > 0)
+		{
+			revrotate('a', head);
+		}
+		while (B_rev_rotate_b > B_rev_rotate_a && B_rev_delta-- > 0)
+		{
+			revrotate('b', head);
+		}
+	}
+	push('b', head);
 }
 
 /* This function returns the length of an increasing subsequence */
@@ -52,10 +159,10 @@ int increasing_subsequence(struct s_node *lis_start)
 	int					benchmark;
 	int					i;
 
-	parser = lis_start;
+	parser = lis_start->next;
 	benchmark = lis_start->index;
-	i = 0;
-	while (parser != lis_start || i++ == 0)
+	i = 1;
+	while (parser != lis_start)
 	{
 		if (benchmark < parser->index)
 		{
@@ -64,7 +171,7 @@ int increasing_subsequence(struct s_node *lis_start)
 		}
 		parser = parser->next;
 	}
-	return (--i);
+	return (i);
 }
 
 /* This function checks whether or not *node is part of the *lis_start lis */

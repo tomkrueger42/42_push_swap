@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/01 02:16:25 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/01 22:53:25 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,15 @@ void				revrotate(char c, struct s_head *head);
 /* list_handling.c */
 
 int					lst_size(struct s_node *start);
-struct s_node		*insert_node_b4(struct s_node *next_node, /* struct s_content *content */ DATATYPE content, int index);
+struct s_node		*insert_node_b4(struct s_node *next_node, DATATYPE content, int index);
 int					error_free(char *errormsg, struct s_head *head);
 //void				free_node(struct s_node *node);
 
 /* lis.c */
 
-int					increasing_subsequence(struct s_node *lis_start);
 int					lis(struct s_head *head);
+void				make_this_efficient(struct s_node *lis_start, struct s_head *head);
+int					increasing_subsequence(struct s_node *lis_start);
 int					part_of_lis(struct s_node *lis_start, struct s_node *node);
 int					value_at(struct s_node *node, int pos);
 

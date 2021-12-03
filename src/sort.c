@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:48:39 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/01 14:39:53 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/02 00:23:26 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 void	push_sorted(char c, struct s_head *head)
 {
-	int	i;
+	int	count;
 
 	if (c == 'a')
 	{
-		i = find_right_position(c, head->b, head);
-		while (i > 0 && i--)
+		count = find_right_position(c, head->b, head);
+		count = count <= lst_size(head->a) / 2 ? count : -(lst_size(head->a) - count);
+		while (count > 0 && count--)
 		{
 			rotate(c, head);
 		}
-		while (i < 0 && i++)
+		while (count < 0 && count++)
 		{
 			revrotate(c, head);
 		}
@@ -31,10 +32,11 @@ void	push_sorted(char c, struct s_head *head)
 	}
 	else if (c == 'b')
 	{
-		i = find_right_position(c, head->a, head);
-		while (i > 0 && i--)
+		count = find_right_position(c, head->a, head);
+		count = count <= lst_size(head->b) / 2 ? count : -(lst_size(head->b) - count);
+		while (count > 0 && count--)
 			rotate(c, head);
-		while (i < 0 && i++)
+		while (count < 0 && count++)
 			revrotate(c, head);
 		push(c, head);
 	}
@@ -54,17 +56,14 @@ int	find_right_position(char c, struct s_node *node, struct s_head *head)
 	while (c == 'a' && (parser != node || i == 0))
 	{
 		if (lst_size(head->a) <= 1 || (parser->prev->index < node->index && node->index < parser->index) || ((parser->prev->index < node->index || node->index < parser->index) && lis_break(c, parser)))
-			return (i <= lst_size(head->a) / 2 ? i : -(lst_size(head->a) - i));
+			return (i);
 		parser = parser->next;
 		i++;
 	}
 	while (c == 'b' && (parser != node || i == 0))
 	{
-		//
-		// somehow my algorithm is still fucked up; example input: python3 pyviz.py 30 60 100 20 80 50 90 -10 40 10
-		//
 		if (lst_size(head->b) <= 1 || (parser->prev->index > node->index && node->index > parser->index) || ((parser->prev->index > node->index || node->index > parser->index) && lis_break(c, parser)))
-			return (i <= lst_size(head->b) / 2 ? i : -(lst_size(head->b) - i));
+			return (i);
 		parser = parser->next;
 		i++;
 	}

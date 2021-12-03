@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 18:01:15 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/01 13:54:57 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/02 00:24:00 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ struct s_node	*push_it(struct s_node **src, struct s_node **dst)
 
 void	rotate(char c, struct s_head *head)
 {
-	if ((c == 'a' || c == 'A') /* && head->a != NULL */)
+	if ((c == 'a' || c == 'A') && head->a != NULL)
 	{
 		head->a = head->a->next;
 		if (c == 'a')
 			head->i = insert_node_b4(head->i, (DATATYPE)0, RA);
 	}
-	else if ((c == 'b' || c == 'B') /* && head->b != NULL */)
+	else if ((c == 'b' || c == 'B') && head->b != NULL)
 	{
 		head->b = head->b->next;
 		if (c == 'b')
@@ -107,13 +107,13 @@ void	rotate(char c, struct s_head *head)
 
 void	revrotate(char c, struct s_head *head)
 {
-	if ((c == 'a' || c == 'A') /* && head->a != NULL */)
+	if ((c == 'a' || c == 'A') && head->a != NULL)
 	{
 		head->a = head->a->prev;
 		if (c == 'a')
 			head->i = insert_node_b4(head->i, (DATATYPE)0, RRA);
 	}
-	else if ((c == 'b' || c == 'B') /* && head->b != NULL */)
+	else if ((c == 'b' || c == 'B') && head->b != NULL)
 	{
 		head->b = head->b->prev;
 		if (c == 'b')
