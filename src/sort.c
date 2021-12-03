@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:48:39 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/02 00:23:26 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/03 21:27:10 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,29 @@ int	find_right_position(char c, struct s_node *node, struct s_head *head)
 {
 	struct s_node	*parser;
 	int				i;
+	int				size;
 
 	i = 0;
 	if (c == 'a')
+	{
 		parser = head->a;
+		size = lst_size(head->a);
+	}
 	else if (c == 'b')
+	{
 		parser = head->b;
+		size = lst_size(head->b);
+	}
 	while (c == 'a' && (parser != node || i == 0))
 	{
-		if (lst_size(head->a) <= 1 || (parser->prev->index < node->index && node->index < parser->index) || ((parser->prev->index < node->index || node->index < parser->index) && lis_break(c, parser)))
+		if (size <= 1 || (parser->prev->index < node->index && node->index < parser->index) || ((parser->prev->index < node->index || node->index < parser->index) && lis_break(c, parser)))
 			return (i);
 		parser = parser->next;
 		i++;
 	}
 	while (c == 'b' && (parser != node || i == 0))
 	{
-		if (lst_size(head->b) <= 1 || (parser->prev->index > node->index && node->index > parser->index) || ((parser->prev->index > node->index || node->index > parser->index) && lis_break(c, parser)))
+		if (size <= 1 || (parser->prev->index > node->index && node->index > parser->index) || ((parser->prev->index > node->index || node->index > parser->index) && lis_break(c, parser)))
 			return (i);
 		parser = parser->next;
 		i++;
