@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_handling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:43:18 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/03 02:47:55 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/03 21:38:57 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,52 +60,13 @@ int	error_free(char *errormsg, struct s_head *head)
 {
 	struct s_node	*node;
 	
-	while (head->a != NULL)
+	int i = lst_size(head->a);
+	while (i-- > 0)
 	{
-		printf("head->a: %p\n", head->a);
-		printf("h->a->n: %p\n", head->a->next);
 		node = head->a;
 		head->a = head->a->next;
-		node->next = NULL;
-		node->prev = NULL;
 		free(node);
-	}
-	if (head->a != NULL)
-	{
-		head->a->next = NULL;
-		head->a->prev = NULL;
-		free(head->a);
-	}
-	while (head->b != NULL && head->b->next != NULL && head->b != head->b->next)
-	{
-		printf("head->b: %p\n", head->b);
-		printf("h->b->n: %p\n", head->b->next);
-		head->b = head->b->next;
-		head->b->prev->next = NULL;
-		head->b->prev->prev = NULL;
-		free(head->b->prev);
-	}
-	if (head->b != NULL)
-	{
-		head->b->next = NULL;
-		head->b->prev = NULL;
-		free(head->b);
 	}
 	ft_putstr_fd(errormsg, FILE_DESCRIPTOR);
 	return (1);
 }
-
-/* This function frees a node and its content element */
-/* void	free_node(struct s_node *node)
-{
-	if (node != NULL)
-	{
-		if (node->content != NULL)
-			free(node->content);
-		node->content = NULL;
-		free(node);
-		node->prev = NULL;
-		node->next = NULL;
-	}
-}
- */

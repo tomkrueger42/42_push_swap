@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/01 22:53:25 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/03 21:36:33 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include "../libs/libft/includes/libft.h"
 # include <stdio.h>
 # include <time.h>
+
+/* defined because valgrind requires it */
+
+# define INT32_MAX 2147483647
 
 /* change the following for sorting other datatypes */
 
@@ -86,7 +90,6 @@ void				revrotate(char c, struct s_head *head);
 int					lst_size(struct s_node *start);
 struct s_node		*insert_node_b4(struct s_node *next_node, DATATYPE content, int index);
 int					error_free(char *errormsg, struct s_head *head);
-//void				free_node(struct s_node *node);
 
 /* lis.c */
 

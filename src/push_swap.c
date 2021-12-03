@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/03 02:20:47 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/03 22:14:43 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,25 @@ int	main(int argc, char **argv)
 	struct s_head	*head;
 
 	head = malloc(sizeof(head));
+	
+	printf("head: %p\n", head);
+	printf("head->a: %p\n", head->a);
+	printf("head->b: %p\n", head->b);
+	printf("head->i: %p\n", head->i);
 	if (head == NULL || !input_conversion(argc, argv, head))
 		return (0);
-	head->i = NULL;
+	printf("head->a: %p\n", head->a);
+	printf("head->b: %p\n", head->b);
+	printf("head->i: %p\n", head->i);
 
 	assign_indeces(head);
+	printf("head->a: %p\n", head->a);
+	printf("head->b: %p\n", head->b);
+	printf("head->i: %p\n", head->i);
 	(void)lis(head);
 	merge_to_stack_a(head);
 	(void)put_inst(head);
-	//print_go_brrrrr(head);
-	error_free("does it free?\nlet's see!\n", head);
+	error_free("free\n", head);
 	//system("leaks push_swap");
 }
 
@@ -36,17 +45,27 @@ struct s_head	*input_conversion(int argc, char **argv, struct s_head *head)
 		argv = ft_split(argv[1], ' ');
 	else
 		argv = &argv[1];
+	printf("ic head->i: %p\n", head->i);
 	while (*argv != NULL)
 	{
+		printf("ic head->i: %p\n", head->i);
+		// the following line changes somehow head->i
 		if (ft_strncmp(*argv, ft_itoa(ft_atoi(*argv)), ft_strlen(*argv)) != 0)
 		{
+			printf("ee head->i: %p\n", head->i);
+			printf("input is bad\n");
 			error_free("bad input :(\n", head);
 			return (NULL);
 		}
 		else if (head->a == NULL)
+		{
 			head->a = insert_node_b4(NULL, ft_atoi(*argv), -1);
+			printf("ic head->i: %p\n", head->i);
+		}
 		else
+		{
 			head->a = insert_node_b4(head->a, ft_atoi(*argv), -1);
+		}
 		argv++;
 	}
 	rotate('A', head);
