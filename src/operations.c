@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 18:01:15 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/02 00:24:00 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/08 16:48:08 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	swap(char c, struct s_head *head)
 {
 	DATATYPE			tmp;
-	//struct s_content	*tmp;
 
 	if ((c == 'a' || c == 'A') && head->a != head->a->next /* && head->a != NULL */)
 	{
@@ -23,7 +22,7 @@ void	swap(char c, struct s_head *head)
 		head->a->content = head->a->next->content;
 		head->a->next->content = tmp;
 		if (c == 'a')
-			head->i = insert_node_b4(head->i, (DATATYPE)0, SA);
+			ft_putstr_fd("sa\n", FILE_DESCRIPTOR);
 	}
 	else if ((c == 'b' || c == 'B') && head->b != head->b->next /* && head->b != NULL */)
 	{
@@ -31,13 +30,13 @@ void	swap(char c, struct s_head *head)
 		head->b->content = head->b->next->content;
 		head->b->next->content = tmp;
 		if (c == 'b')
-			head->i = insert_node_b4(head->i, (DATATYPE)0, SB);
+			ft_putstr_fd("sb\n", FILE_DESCRIPTOR);
 	}
 	else if (c == 's')
 	{
 		swap('A', head);
 		swap('B', head);
-		head->i = insert_node_b4(head->i, (DATATYPE)0, SS);
+		ft_putstr_fd("ss\n", FILE_DESCRIPTOR);
 	}
 }
 
@@ -46,12 +45,12 @@ void	push(char c, struct s_head *head)
 	if (c == 'a' /* && head->a != NULL */)
 	{
 		head->a = push_it(&head->b, &head->a);
-		head->i = insert_node_b4(head->i, (DATATYPE)0, PA);
+		ft_putstr_fd("pa\n", FILE_DESCRIPTOR);
 	}
 	else if (c == 'b'/*  && head->b != NULL */)
 	{
 		head->b = push_it(&head->a, &head->b);
-		head->i = insert_node_b4(head->i, (DATATYPE)0, PB);
+		ft_putstr_fd("pb\n", FILE_DESCRIPTOR);
 	}
 }
 
@@ -89,19 +88,19 @@ void	rotate(char c, struct s_head *head)
 	{
 		head->a = head->a->next;
 		if (c == 'a')
-			head->i = insert_node_b4(head->i, (DATATYPE)0, RA);
+			ft_putstr_fd("ra\n", FILE_DESCRIPTOR);
 	}
 	else if ((c == 'b' || c == 'B') && head->b != NULL)
 	{
 		head->b = head->b->next;
 		if (c == 'b')
-			head->i = insert_node_b4(head->i, (DATATYPE)0, RB);
+			ft_putstr_fd("rb\n", FILE_DESCRIPTOR);
 	}
 	else if (c == 'r')
 	{
 		rotate('A', head);
 		rotate('B', head);
-		head->i = insert_node_b4(head->i, (DATATYPE)0, RR);
+		ft_putstr_fd("rr\n", FILE_DESCRIPTOR);
 	}
 }
 
@@ -111,18 +110,18 @@ void	revrotate(char c, struct s_head *head)
 	{
 		head->a = head->a->prev;
 		if (c == 'a')
-			head->i = insert_node_b4(head->i, (DATATYPE)0, RRA);
+			ft_putstr_fd("rra\n", FILE_DESCRIPTOR);
 	}
 	else if ((c == 'b' || c == 'B') && head->b != NULL)
 	{
 		head->b = head->b->prev;
 		if (c == 'b')
-			head->i = insert_node_b4(head->i, (DATATYPE)0, RRB);
+			ft_putstr_fd("rrb\n", FILE_DESCRIPTOR);
 	}
 	else if (c == 'r')
 	{
 		revrotate('A', head);
 		revrotate('B', head);
-		head->i = insert_node_b4(head->i, (DATATYPE)0, RRR);
+		ft_putstr_fd("rrr\n", FILE_DESCRIPTOR);
 	}
 }

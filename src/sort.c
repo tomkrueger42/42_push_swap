@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:48:39 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/03 21:56:13 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/08 18:29:43 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	find_right_position(char c, struct s_node *node, struct s_head *head)
 	}
 	else if (c == 'b')
 	{
-		//printf("head->b: %p\n", head->b);
 		parser = head->b;
 		size = lst_size(head->b);
 	}

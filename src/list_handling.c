@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_handling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:43:18 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/03 21:38:57 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/08 18:23:44 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	lst_size(struct s_node *start)
 	return (i);
 }
 
-/* This function inserts a new node b4 prev_node */
-struct s_node	*insert_node_b4(struct s_node *prev_node, int content, int index)
+/* This function inserts a new node before prev_node */
+struct s_node	*insert_node(struct s_node *prev_node, int content, int index)
 {
 	struct s_node	*new;
 
@@ -56,17 +56,25 @@ struct s_node	*insert_node_b4(struct s_node *prev_node, int content, int index)
 }
 
 /* This function frees the stack and puts an error message to FILE_DESCRIPTOR */
-int	error_free(char *errormsg, struct s_head *head)
+void	free_exit(char *errormsg, int exit_code, struct s_head *head)
 {
-	struct s_node	*node;
-	
-	int i = lst_size(head->a);
-	while (i-- > 0)
-	{
-		node = head->a;
-		head->a = head->a->next;
-		free(node);
-	}
+	free_cdll(head->a);
+	free_cdll(head->b);
 	ft_putstr_fd(errormsg, FILE_DESCRIPTOR);
-	return (1);
+	exit(exit_code);
+}
+
+void	free_cdll(struct s_node *node)
+{
+	struct s_node	*tmp;
+
+	if (node == NULL)
+		return ;
+	node->prev->next = NULL;
+	while (node != NULL)
+	{
+		tmp = node->next;
+		free(node);
+		node = tmp;
+	}
 }
