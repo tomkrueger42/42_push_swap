@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/08 18:23:51 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/09 15:43:14 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct	s_node
 /* push_swap.c */
 
 int					main(int argc, char **argv);
-struct s_head		*input_conversion(int argc, char **argv, struct s_head *head);
+void				input_conversion(int argc, char **argv, struct s_head *head);
 void				assign_indeces(struct s_head *head);
 void				print_go_brrrrr(struct s_head *head);
 
