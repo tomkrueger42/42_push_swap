@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lis.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:05:40 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/12/03 02:20:50 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/10 19:51:57 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,31 +33,10 @@ int lis(struct s_head *head)
 		}
 		parser = parser->next;
 	}
-	//system("leaks push_swap");
 	while (lst_size(head->a) > lis_len)
-	{
 		make_this_efficient(lis_start, head);
-	}
 	return (lis_len);
 }
-
-/* 	printf("rotate_a = %i\n", rotate_a);
-	printf("rev_rotate_a = %i\n", rev_rotate_a);
-	printf("rotate_b = %i\n", rotate_b);
-	printf("rev_rotate_b = %i\n", rev_rotate_b);
-	printf("rotate_r = %i\n", rotate_r);
-	printf("rev_rotate_r = %i\n", rev_rotate_r);
-	printf("delta = %i\n", delta);
-	printf("rev_delta = %i\n", rev_delta);
-	printf("i = %i\n", i);
-	printf("B_rotate_a = %i\n", B_rotate_a);
-	printf("B_rev_rotate_a = %i\n", B_rev_rotate_a);
-	printf("B_rotate_b = %i\n", B_rotate_b);
-	printf("B_rev_rotate_b = %i\n", B_rev_rotate_b);
-	printf("B_rotate_r = %i\n", B_rotate_r);
-	printf("B_rev_rotate_r = %i\n", B_rev_rotate_r);
-	printf("B_delta = %i\n", B_delta);
-	printf("B_rev_delta = %i\n", B_rev_delta); */
 	
 void	make_this_efficient(struct s_node *lis_start, struct s_head *head)
 {
@@ -121,32 +100,20 @@ void	make_this_efficient(struct s_node *lis_start, struct s_head *head)
 	if (B_rotate_r + B_delta <= B_rev_rotate_r + B_rev_delta)
 	{
 		while (B_rotate_r-- > 0)
-		{
 			rotate('r', head);
-		}
 		while (B_rotate_a > B_rotate_b && B_delta-- > 0)
-		{
 			rotate('a', head);
-		}
 		while (B_rotate_b > B_rotate_a && B_delta-- > 0)
-		{
 			rotate('b', head);
-		}
 	}
 	else if (B_rotate_r + B_delta > B_rev_rotate_r + B_rev_delta)
 	{
 		while (B_rev_rotate_r-- > 0)
-		{
 			revrotate('r', head);
-		}
 		while (B_rev_rotate_a > B_rev_rotate_b && B_rev_delta-- > 0)
-		{
 			revrotate('a', head);
-		}
 		while (B_rev_rotate_b > B_rev_rotate_a && B_rev_delta-- > 0)
-		{
 			revrotate('b', head);
-		}
 	}
 	push('b', head);
 }

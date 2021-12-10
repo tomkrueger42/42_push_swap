@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/10 19:21:42 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/10 19:54:00 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 # include "../libs/libft/includes/libft.h"
 # include <stdio.h>
-# include <time.h>
 
 /* change the following for manipulating the program */
 
@@ -46,6 +45,9 @@ typedef struct	s_node
 int					main(int argc, char **argv);
 void				input_conversion(int argc, char **argv, struct s_head *head);
 void				assign_indeces(struct s_head *head);
+
+/* print.c */
+
 void				print_go_brrrrr(struct s_head *head);
 
 /* operations.c */
