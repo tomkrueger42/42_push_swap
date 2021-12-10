@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/09 15:43:14 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/10 19:21:42 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct	s_head
 {
 	struct s_node	*a;
 	struct s_node	*b;
-	char			*inst;
 }				t_head;
 
 typedef struct	s_node
