@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_handling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:43:18 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/10 19:22:23 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/13 20:40:45 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	free_exit(char *errormsg, int exit_code, struct s_head *head)
 	free_cdll(head->b);
 	free(head);
 	ft_putstr_fd(errormsg, FILE_DESCRIPTOR);
-	system("leaks push_swap");
+	//system("leaks push_swap");
 	exit(exit_code);
 }
 

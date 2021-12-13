@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lis.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:05:40 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/12/10 19:51:57 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/13 23:12:37 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ int lis(struct s_head *head)
 		parser = parser->next;
 	}
 	while (lst_size(head->a) > lis_len)
+	{
 		make_this_efficient(lis_start, head);
+	}
 	return (lis_len);
 }
 	

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/10 19:54:00 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/13 23:10:42 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int					part_of_lis(struct s_node *lis_start, struct s_node *node);
 
 /* sort.c */
 
-void				push_sorted(char c, struct s_head *head);
 int					find_right_position(char c, struct s_node *node, struct s_head *head);
 int					lis_break(char c, struct s_node *node);
 
