@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/14 01:15:47 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/14 01:31:57 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void				free_cdll(struct s_node *node);
 
 /* lis.c */
 
-int					lis(struct s_head *head);
+void				lis(struct s_head *head);
 void				make_this_efficient(struct s_node *lis_start, struct s_head *head);
 int					increasing_subsequence(struct s_node *lis_start);
 int					part_of_lis(struct s_node *lis_start, struct s_node *node);

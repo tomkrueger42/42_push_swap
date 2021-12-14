@@ -6,14 +6,14 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:05:40 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/12/14 01:22:42 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/14 01:34:06 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
 /* This function finds the longest increasing sub-sequence in stack a and isolates that with push_sorted() */
-int lis(struct s_head *head)
+void lis(struct s_head *head)
 {
 	struct s_node		*parser;
 	struct s_node		*lis_start;
@@ -21,23 +21,21 @@ int lis(struct s_head *head)
 	int					i;
 
 	lis_len = 0;
-	parser = head->a;
-	lis_len = 0;
-	i = 0;
-	while (parser != head->a || i++ == 0)
-	{
-		if (lis_len < increasing_subsequence(parser))
-		{
-			lis_len = increasing_subsequence(parser);
-			lis_start = parser;
-		}
-		parser = parser->next;
-	}
 	while (lst_size(head->a) > lis_len)
 	{
+		parser = head->a;	
+		i = 0;
+		while (parser != head->a || i++ == 0)
+		{
+			if (lis_len < increasing_subsequence(parser))
+			{
+				lis_len = increasing_subsequence(parser);
+				lis_start = parser;
+			}
+			parser = parser->next;
+		}
 		make_this_efficient(lis_start, head);
 	}
-	return (lis_len);
 }
 	
 void	make_this_efficient(struct s_node *lis_start, struct s_head *head)
