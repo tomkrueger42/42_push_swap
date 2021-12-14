@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/13 23:10:42 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/14 01:15:47 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ int					part_of_lis(struct s_node *lis_start, struct s_node *node);
 
 /* sort.c */
 
-int					find_right_position(char c, struct s_node *node, struct s_head *head);
-int					lis_break(char c, struct s_node *node);
+int					find_right_position(struct s_node *node, struct s_node *dst);
 
 /* merge.c */
 

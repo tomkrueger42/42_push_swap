@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:05:40 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/12/13 23:12:37 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/14 01:22:42 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	make_this_efficient(struct s_node *lis_start, struct s_head *head)
 		if (part_of_lis(lis_start, parser) == 0)
 		{
 			rev_rotate_a = rotate_a == 0 ? 0 : lst_size(head->a) - rotate_a;
-			rotate_b = find_right_position('b', parser, head);
+			rotate_b = find_right_position(parser, head->b);
 			rev_rotate_b = rotate_b == 0 ? 0 : lst_size(head->b) - rotate_b;
 			rotate_r = rotate_a < rotate_b ? rotate_a : rotate_b;
 			rev_rotate_r = rev_rotate_a < rev_rotate_b ? rev_rotate_a : rev_rotate_b;
