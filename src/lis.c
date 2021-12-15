@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:05:40 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/12/15 19:06:42 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/15 19:55:37 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void efficient_rotation(struct s_node *lis_start, struct s_node *src, struct s_n
 		free_exit("Error\n", EXIT_FAILURE, head);
 	rollercoaster->best_delta = INT32_MAX;
 	rollercoaster->best_rev_delta = INT32_MAX;
+	rollercoaster->best_x_src = INT32_MAX;
 	while (rollercoaster->rotate_src < lst_size(src))
 	{
 		if (part_of_lis(lis_start, src) == 0)
@@ -67,6 +68,8 @@ void	set_rotations(struct s_rotation *rollercoaster, struct s_node *src, struct 
 	rollercoaster->rev_rotate_src = rollercoaster->rotate_src == 0 ? 0 : lst_size(src) - rollercoaster->rotate_src;
 	rollercoaster->rotate_dst = find_right_position(src, dst);
 	rollercoaster->rev_rotate_dst = rollercoaster->rotate_dst == 0 ? 0 : lst_size(dst) - rollercoaster->rotate_dst;
+	rollercoaster->x_src = rollercoaster->rotate_src < rollercoaster->rev_rotate_src ? rollercoaster->rotate_src : -rollercoaster->rev_rotate_src;
+	rollercoaster->x_dst = rollercoaster->rotate_dst < rollercoaster->rev_rotate_dst ? rollercoaster->rotate_dst : -rollercoaster->rev_rotate_dst;
 	rollercoaster->rotate_all = MIN(rollercoaster->rotate_src, rollercoaster->rotate_dst);
 	rollercoaster->rev_rotate_all = MIN(rollercoaster->rev_rotate_src, rollercoaster->rev_rotate_dst);
 	rollercoaster->delta = DIFF(rollercoaster->rotate_src, rollercoaster->rotate_dst);
@@ -89,13 +92,20 @@ void benchmark_rotations(struct s_rotation *rollercoaster)
 		rollercoaster->best_rev_rotate_all = rollercoaster->rev_rotate_all;
 		rollercoaster->best_rev_delta = rollercoaster->rev_delta;
 	}
+	if (ABS(rollercoaster->x_src) + ABS(rollercoaster->x_dst) < ABS(rollercoaster->best_x_src) + ABS(rollercoaster->best_x_dst))
+	{
+		rollercoaster->best_x_src = rollercoaster->x_src;
+		rollercoaster->best_x_dst = rollercoaster->x_dst;
+	}
 }
 
 void rock_n_roll(struct s_rotation *rollercoaster, struct s_node *src, struct s_head *head)
 {
 	char	c;
 
-	if (rollercoaster->best_rotate_all + rollercoaster->best_delta <= rollercoaster->best_rev_rotate_all + rollercoaster->best_rev_delta)
+	
+	if (rollercoaster->best_rotate_all + rollercoaster->best_delta <= rollercoaster->best_rev_rotate_all + rollercoaster->best_rev_delta
+		&& rollercoaster->best_rotate_all + rollercoaster->best_delta <= ABS(rollercoaster->best_x_src) + ABS(rollercoaster->best_x_dst))
 	{
 		if (rollercoaster->best_rotate_src > rollercoaster->best_rotate_dst)
 			c = src == head->a ? 'a' : 'b';
@@ -106,7 +116,7 @@ void rock_n_roll(struct s_rotation *rollercoaster, struct s_node *src, struct s_
 		while (rollercoaster->best_delta-- > 0)
 			rotate(c, head);
 	}
-	else
+	else if (rollercoaster->best_rev_rotate_all + rollercoaster->best_rev_delta <= ABS(rollercoaster->best_x_src) + ABS(rollercoaster->best_x_dst))
 	{
 		if (rollercoaster->best_rev_rotate_src > rollercoaster->best_rev_rotate_dst)
 			c = src == head->a ? 'a' : 'b';
@@ -115,6 +125,19 @@ void rock_n_roll(struct s_rotation *rollercoaster, struct s_node *src, struct s_
 		while (rollercoaster->best_rev_rotate_all-- > 0)
 			revrotate('r', head);
 		while (rollercoaster->best_rev_delta-- > 0)
+			revrotate(c, head);
+	}
+	else
+	{
+		c = src == head->a ? 'a' : 'b';
+		while (rollercoaster->best_x_src > 0 && rollercoaster->best_x_src--)
+			rotate(c, head);
+		while (rollercoaster->best_x_src < 0 && rollercoaster->best_x_src++)
+			revrotate(c, head);
+		c = c == 'a' ? 'b' : 'a';
+		while (rollercoaster->best_x_dst > 0 && rollercoaster->best_x_dst--)
+			rotate(c, head);
+		while (rollercoaster->best_x_dst < 0 && rollercoaster->best_x_dst++)
 			revrotate(c, head);
 	}
 }

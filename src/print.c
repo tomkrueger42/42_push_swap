@@ -33,3 +33,29 @@ void	print_go_brrrrr(struct s_head *head)
 	}
 	printf("\n------------------------------\n");
 }
+
+void	ridin_the_rollercoaster(struct s_rotation *rollercoaster, bool print_best)
+{
+	printf("rotate_src: %i\n", 			rollercoaster->rotate_src);
+	printf("rev_rotate_src: %i\n", 		rollercoaster->rev_rotate_src);
+	printf("rotate_dst: %i\n", 			rollercoaster->rotate_dst);
+	printf("rev_rotate_dst: %i\n", 		rollercoaster->rev_rotate_dst);
+	printf("x_src: %i\n", 				rollercoaster->x_src);
+	printf("x_dst: %i\n", 				rollercoaster->x_dst);
+	printf("rotate_all: %i\n", 			rollercoaster->rotate_all);
+	printf("rev_rotate_all: %i\n", 		rollercoaster->rev_rotate_all);
+	printf("delta: %i\n", 				rollercoaster->delta);
+	printf("rev_delta: %i\n", 			rollercoaster->rev_delta);
+	if (print_best == false)
+		return ;
+	printf("best_rotate_src: %i\n", 	rollercoaster->best_rotate_src);
+	printf("best_rev_rotate_src: %i\n", rollercoaster->best_rev_rotate_src);
+	printf("best_rotate_dst: %i\n", 	rollercoaster->best_rotate_dst);
+	printf("best_rev_rotate_dst: %i\n", rollercoaster->best_rev_rotate_dst);
+	printf("best_x_src: %i\n", 			rollercoaster->best_x_src);
+	printf("best_x_dst: %i\n", 			rollercoaster->best_x_dst);
+	printf("best_rotate_all: %i\n", 	rollercoaster->best_rotate_all);
+	printf("best_rev_rotate_all: %i\n", rollercoaster->best_rev_rotate_all);
+	printf("best_delta: %i\n", 			rollercoaster->best_delta);
+	printf("best_rev_delta: %i\n", 		rollercoaster->best_rev_delta);
+}
