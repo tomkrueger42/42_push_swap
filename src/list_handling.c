@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:43:18 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/15 17:01:14 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/15 19:01:43 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ struct s_node	*insert_node(struct s_node *prev_node, int content, int index)
 /* This function frees the stack and puts an error message to FILE_DESCRIPTOR */
 void	free_exit(char *errormsg, int exit_code, struct s_head *head)
 {
+	if (exit_code == EXIT_FAILURE)
+		print_go_brrrrr(head);
 	free_cdll(head->a);
 	free_cdll(head->b);
 	free(head);

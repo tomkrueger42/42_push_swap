@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/15 15:41:41 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/15 19:11:13 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,9 @@
 
 /* macro to return the smaller one of two values */
 
-/* #define MAX(a,b) ({ \
-    typeof(a) _a_temp_; \
-    typeof(b) _b_temp_; \
-    _a_temp_ = (a); \
-    _b_temp_ = (b); \
-    _a_temp_ = _a_temp_ < _b_temp_ ? _b_temp_ : _a_temp_; \
-    }) */
+#define MIN(a, b) (a < b ? a : b)
+#define MAX(a, b) (a > b ? a : b)
+#define DIFF(a, b) (a > b ? a - b : b - a)
 
 /* structs */
 
@@ -55,7 +51,9 @@ typedef struct	s_rotation
 	int				rotate_src;
 	int				rev_rotate_src;
 	int				rotate_dst;
-	int				rev_rotate_dst;
+	int				rev_rotate_dst;/* 
+	int				x_src;
+	int				x_dst; */
 	int				rotate_all;
 	int				rev_rotate_all;
 	int				delta;
@@ -63,7 +61,9 @@ typedef struct	s_rotation
 	int				best_rotate_src;
 	int				best_rev_rotate_src;
 	int				best_rotate_dst;
-	int				best_rev_rotate_dst;
+	int				best_rev_rotate_dst;/* 
+	int				best_x_src;
+	int				best_x_dst; */
 	int				best_rotate_all;
 	int				best_rev_rotate_all;
 	int				best_delta;
@@ -100,12 +100,11 @@ void				free_cdll(struct s_node *node);
 void				lis(struct s_head *head);
 
 void	efficient_rotation(struct s_node *lis_start, struct s_node *src, struct s_node *dst, struct s_head *head);
-void	set_rotations(/* struct s_node *lis_start,  */struct s_rotation *rollercoaster, struct s_node *src, struct s_node *dst);
+void	set_rotations(struct s_rotation *rollercoaster, struct s_node *src, struct s_node *dst);
 void	benchmark_rotations(struct s_rotation *rollercoaster);
 void	rock_n_roll(struct s_rotation *rollercoaster, struct s_node *src, struct s_head *head);
 
 
-void				make_this_efficient(struct s_node *lis_start, struct s_head *head);
 int					increasing_subsequence(struct s_node *lis_start);
 int					part_of_lis(struct s_node *lis_start, struct s_node *node);
 
