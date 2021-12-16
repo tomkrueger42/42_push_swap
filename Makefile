@@ -6,7 +6,7 @@
 #    By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 14:28:19 by tkruger           #+#    #+#              #
-#    Updated: 2021/12/15 16:48:20 by tomkrueger       ###   ########.fr        #
+#    Updated: 2021/12/16 13:53:48 by tomkrueger       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ FLAGS = -Wall -Werror -Wextra -o
 # **************************************************************************** #
 
 SRC = ./src/push_swap.c ./src/list_handling.c ./src/operations.c ./src/lis.c\
-		./src/sort.c ./src/merge.c ./src/print.c
+		./src/efficient_rotation.c ./src/print.c
 
 # **************************************************************************** #
 #		Libs

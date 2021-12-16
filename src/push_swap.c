@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/10 19:06:34 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/16 14:58:36 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int argc, char **argv)
 	free_exit("", EXIT_SUCCESS, head);
 }
 
+/* This f() converts the char **argv into a stack and checks for errors */
 void	input_conversion(int argc, char **argv, struct s_head *head)
 {
 	char	**input;
@@ -54,8 +55,8 @@ void	input_conversion(int argc, char **argv, struct s_head *head)
 	rotate('A', head);
 }
 
-/* This function assigns indices for each element for easier comparison
-while checking for doubles*/
+/* This f() assigns indices for each element for easier comparison while
+checking for doubles*/
 void	assign_indeces(struct s_head *head)
 {
 	struct s_node	*parser;
@@ -81,4 +82,30 @@ void	assign_indeces(struct s_head *head)
 		lowest->index = i;
 		i++;
 	}
+}
+
+/* This f() merges both stacks onto stack a sorted */
+void	merge_to_stack_a(struct s_head *head)
+{
+	struct s_node	*parser;
+	int				i;
+
+	i = 0;
+	while (head->b != NULL)
+	{
+		efficient_rotation(NULL, head->b, head->a, head);
+		push('a', head);
+	}
+	i = 0;
+	parser = head->a;
+	while (parser->index > parser->prev->index)
+	{
+		parser = parser->next;
+		i++;
+	}
+	i = i <= lst_size(head->a) / 2 ? i : -(lst_size(head->a) - i);
+	while (i > 0 && i--)
+		rotate('a', head);
+	while (i < 0 && i++)
+		revrotate('a', head);
 }

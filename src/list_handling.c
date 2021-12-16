@@ -6,13 +6,13 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:43:18 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/15 19:01:43 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/16 15:50:10 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-/* This function returns the size of the list */
+/* This f() returns the size of the list */
 int	lst_size(struct s_node *start)
 {
 	struct s_node	*parser;
@@ -30,7 +30,7 @@ int	lst_size(struct s_node *start)
 	return (i);
 }
 
-/* This function inserts a new node before prev_node */
+/* This f() inserts a new node before prev_node */
 struct s_node	*insert_node(struct s_node *prev_node, int content, int index)
 {
 	struct s_node	*new;
@@ -55,7 +55,27 @@ struct s_node	*insert_node(struct s_node *prev_node, int content, int index)
 	return (new);
 }
 
-/* This function frees the stack and puts an error message to FILE_DESCRIPTOR */
+/* This f() finds the right position for *node in stack *dst */
+int	find_right_position(struct s_node *node, struct s_node *dst)
+{
+	int	i;
+
+	i = 0;
+	if (lst_size(dst) <= 1)
+		return (0);
+	while (true)
+	{
+		if ((dst->prev->index < node->index && node->index < dst->index)
+			|| ((dst->prev->index < node->index || node->index < dst->index)
+			&& dst->index < dst->prev->index))
+			return (i);
+		dst = dst->next;
+		i++;
+	}
+	return (0);
+}
+
+/* This f() frees the stack and puts an error message to FILE_DESCRIPTOR */
 void	free_exit(char *errormsg, int exit_code, struct s_head *head)
 {
 	if (exit_code == EXIT_FAILURE)

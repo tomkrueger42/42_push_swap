@@ -6,7 +6,7 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/15 20:01:04 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/16 15:24:54 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define ALLOW_DOUBLES 0
 # define FILE_DESCRIPTOR 1
 
-/* macro to return the smaller one of two values */
+/* further macros */
 
 #define MIN(a, b) (a < b ? a : b)
 #define MAX(a, b) (a > b ? a : b)
@@ -50,26 +50,18 @@ typedef struct	s_node
 
 typedef struct	s_rotation
 {
-	int				rotate_src;
-	int				rev_rotate_src;
-	int				rotate_dst;
-	int				rev_rotate_dst;
+	int				r_src;
+	int				rr_src;
+	int				r_dst;
+	int				rr_dst;
 	int				x_src;
 	int				x_dst;
-	int				rotate_all;
-	int				rev_rotate_all;
-	int				delta;
-	int				rev_delta;
-	int				best_rotate_src;
-	int				best_rev_rotate_src;
-	int				best_rotate_dst;
-	int				best_rev_rotate_dst;
-	int				best_x_src;
-	int				best_x_dst;
-	int				best_rotate_all;
-	int				best_rev_rotate_all;
-	int				best_delta;
-	int				best_rev_delta;
+	int				m_r_src;
+	int				m_rr_src;
+	int				m_r_dst;
+	int				m_rr_dst;
+	int				m_x_src;
+	int				m_x_dst;
 }				t_rotation;
 
 /* push_swap.c */
@@ -81,11 +73,11 @@ void			assign_indeces(struct s_head *head);
 /* print.c */
 
 void			print_go_brrrrr(struct s_head *head);
-void			ridin_the_rollercoaster(struct s_rotation *rollercoaster, bool print_best);
-
+/* void			ridin_the_rollercoaster(struct s_rotation *rollercoaster, bool print_min);
+ */
 /* operations.c */
 
-void			swap(char c, struct s_head *head);
+int				swap(char c, struct s_head *head);
 void			push(char c, struct s_head *head);
 struct s_node	*push_it(struct s_node **src, struct s_node **dst);
 void			rotate(char c, struct s_head *head);
@@ -101,15 +93,16 @@ void			free_cdll(struct s_node *node);
 /* lis.c */
 
 void			lis(struct s_head *head);
-
-void			efficient_rotation(struct s_node *lis_start, struct s_node *src, struct s_node *dst, struct s_head *head);
-void			set_rotations(struct s_rotation *rollercoaster, struct s_node *src, struct s_node *dst);
-void			benchmark_rotations(struct s_rotation *rollercoaster);
-void			rock_n_roll(struct s_rotation *rollercoaster, struct s_node *src, struct s_head *head);
-
-
 int				increasing_subsequence(struct s_node *lis_start);
 int				part_of_lis(struct s_node *lis_start, struct s_node *node);
+
+/* efficient_rotation.c */
+
+void			efficient_rotation(struct s_node *lis_start, struct s_node *src, struct s_node *dst, struct s_head *head);
+void			set_rotations(struct s_rotation *r, struct s_node *src, struct s_node *dst);
+void			best_rotate(struct s_rotation *r, struct s_node *src, struct s_head *head);
+void			best_revrotate(struct s_rotation *r, struct s_node *src, struct s_head *head);
+void			best_x_rotate(struct s_rotation *r, struct s_node *src, struct s_head *head);
 
 /* sort.c */
 

@@ -6,40 +6,44 @@
 /*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 18:01:15 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/08 16:48:08 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/16 15:26:49 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	swap(char c, struct s_head *head)
+/* This f() executes the swap operation */
+int	swap(char c, struct s_head *head)
 {
-	DATATYPE			tmp;
+	struct s_node	*node;
 
-	if ((c == 'a' || c == 'A') && head->a != head->a->next /* && head->a != NULL */)
+	if (c == 'a' || c == 'A')
 	{
-		tmp = head->a->content;
-		head->a->content = head->a->next->content;
-		head->a->next->content = tmp;
+		node = head->a;
+		head->a = head->a->next;
 		if (c == 'a')
 			ft_putstr_fd("sa\n", FILE_DESCRIPTOR);
 	}
-	else if ((c == 'b' || c == 'B') && head->b != head->b->next /* && head->b != NULL */)
+	else if (c == 'b' || c == 'B')
 	{
-		tmp = head->b->content;
-		head->b->content = head->b->next->content;
-		head->b->next->content = tmp;
+		node = head->b;
+		head->b = head->b->next;
 		if (c == 'b')
 			ft_putstr_fd("sb\n", FILE_DESCRIPTOR);
 	}
-	else if (c == 's')
-	{
-		swap('A', head);
-		swap('B', head);
-		ft_putstr_fd("ss\n", FILE_DESCRIPTOR);
-	}
+	if (c == 's' && swap('A', head) && swap('B', head)
+		&& ft_putstr_fd("ss\n", FILE_DESCRIPTOR))
+		return 0;
+	node->prev->next = node->next;
+	node->next->next->prev = node;
+	node->next->prev = node->prev;
+	node->prev = node->next;
+	node->next = node->next->next;
+	node->prev->next = node;
+	return (1);
 }
 
+/* This f() executes the push operation */
 void	push(char c, struct s_head *head)
 {
 	if (c == 'a' /* && head->a != NULL */)
@@ -54,6 +58,7 @@ void	push(char c, struct s_head *head)
 	}
 }
 
+/* This f() assists with the push operation */
 struct s_node	*push_it(struct s_node **src, struct s_node **dst)
 {
 	if ((*dst) == NULL)
@@ -82,6 +87,7 @@ struct s_node	*push_it(struct s_node **src, struct s_node **dst)
 	return (*dst);
 }
 
+/* This f() executes the rotate operation */
 void	rotate(char c, struct s_head *head)
 {
 	if ((c == 'a' || c == 'A') && head->a != NULL)
@@ -104,6 +110,7 @@ void	rotate(char c, struct s_head *head)
 	}
 }
 
+/* This f() executes the revrotate operation */
 void	revrotate(char c, struct s_head *head)
 {
 	if ((c == 'a' || c == 'A') && head->a != NULL)
