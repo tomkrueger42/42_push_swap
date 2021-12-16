@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/16 14:58:36 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/16 17:31:34 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	struct s_head	*head;
 
-	head = malloc(sizeof(head));
+	head = ft_calloc(1, sizeof(head));
 	if (head == NULL)
 		return (0);
 	input_conversion(argc, argv, head);
@@ -42,7 +42,7 @@ void	input_conversion(int argc, char **argv, struct s_head *head)
 		if (ft_strncmp(input[i], ft_itoa(ft_atoi(input[i])), ft_strlen(input[i])) != 0)
 			free_exit("Error\n", EXIT_FAILURE, head);
 		else
-			head->a = insert_node(head->a, ft_atoi(input[i]), -1);
+			insert_node(ft_atoi(input[i]), head);
 		i++;
 	}
 	i = 0;

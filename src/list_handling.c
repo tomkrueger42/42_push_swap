@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_handling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:43:18 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/16 15:50:10 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/16 17:53:27 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,30 @@ int	lst_size(struct s_node *start)
 }
 
 /* This f() inserts a new node before prev_node */
-struct s_node	*insert_node(struct s_node *prev_node, int content, int index)
+void	insert_node(int content, struct s_head *head)
 {
 	struct s_node	*new;
 
-	new = malloc(sizeof(struct s_node));
+	new = ft_calloc(1, sizeof(struct s_node));
 	if (new == NULL)
-		return (NULL);
-	if (prev_node == NULL)
+		free_exit("malloc failure\n", EXIT_FAILURE, head);
+	free_exit("", 1, head);
+	if (head->a == NULL)
 	{
-		new->next = new;
-		new->prev = new;
+		head->a = new;
+		head->a->next = head->a;
+		head->a->prev = head->a;
 	}
 	else
 	{
-		new->prev = prev_node;
-		new->next = prev_node->next;
+		new->prev = head->a;
+		new->next = head->a->next;
 		new->prev->next = new;
 		new->next->prev = new;
+		head->a = new;
 	}
-	new->index = index;
-	new->content = content;
-	return (new);
+	head->a->index = -1;
+	head->a->content = content;
 }
 
 /* This f() finds the right position for *node in stack *dst */
@@ -98,7 +100,10 @@ void	free_cdll(struct s_node *node)
 	while (node != NULL)
 	{
 		tmp = node->next;
+		node->next = NULL;
+		node->prev = NULL;
 		free(node);
+		node = NULL;
 		node = tmp;
 	}
 }

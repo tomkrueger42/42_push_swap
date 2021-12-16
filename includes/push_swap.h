@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/16 15:24:54 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/16 17:31:47 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct	s_head
 
 typedef struct	s_node
 {
-	DATATYPE			content;
+	int					content;
 	int					index;
 	struct s_node		*next;
 	struct s_node		*prev;
@@ -86,7 +86,7 @@ void			revrotate(char c, struct s_head *head);
 /* list_handling.c */
 
 int				lst_size(struct s_node *start);
-struct s_node	*insert_node(struct s_node *next_node, DATATYPE content, int index);
+void			insert_node(int content, struct s_head *head);
 void			free_exit(char *errormsg, int exit_code, struct s_head *head);
 void			free_cdll(struct s_node *node);
 
