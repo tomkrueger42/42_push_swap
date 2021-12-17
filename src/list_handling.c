@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:43:18 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/16 17:53:27 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/17 01:15:31 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	insert_node(int content, struct s_head *head)
 	new = ft_calloc(1, sizeof(struct s_node));
 	if (new == NULL)
 		free_exit("malloc failure\n", EXIT_FAILURE, head);
-	free_exit("", 1, head);
 	if (head->a == NULL)
 	{
 		head->a = new;
@@ -80,11 +79,9 @@ int	find_right_position(struct s_node *node, struct s_node *dst)
 /* This f() frees the stack and puts an error message to FILE_DESCRIPTOR */
 void	free_exit(char *errormsg, int exit_code, struct s_head *head)
 {
-	if (exit_code == EXIT_FAILURE)
-		print_go_brrrrr(head);
+	//printf("head: %p\n", head);
 	free_cdll(head->a);
 	free_cdll(head->b);
-	free(head);
 	ft_putstr_fd(errormsg, FILE_DESCRIPTOR);
 	//system("leaks push_swap");
 	exit(exit_code);
@@ -99,6 +96,7 @@ void	free_cdll(struct s_node *node)
 	node->prev->next = NULL;
 	while (node != NULL)
 	{
+		//printf("%p\n", node);
 		tmp = node->next;
 		node->next = NULL;
 		node->prev = NULL;

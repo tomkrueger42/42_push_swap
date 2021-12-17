@@ -6,7 +6,7 @@
 #    By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 14:28:19 by tkruger           #+#    #+#              #
-#    Updated: 2021/12/16 17:13:28 by tkruger          ###   ########.fr        #
+#    Updated: 2021/12/17 00:28:58 by tkruger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@
 INPT = "100 2000 1000 -2000 90 1500 8 4 6 3"
 NAME = push_swap
 CC = gcc
-FLAGS = -fsanitize=address -fno-omit-frame-pointer -static-libsan -Wall -Werror -Wextra -o
-
+FLAGS = -Wall -Werror -Wextra -o
+# -fsanitize=address -static-libsan -fno-omit-frame-pointer 
 # **************************************************************************** #
 #		SRC
 # **************************************************************************** #
@@ -62,14 +62,13 @@ fclean:	clean
 
 re:	fclean all
 
-run:
-	bash check.sh
-
-rerun: re run
-
 dbg: libmake
 	$(CC) -g $(FLAGS) $(NAME) $(SRC) $(LIB) $(INC)
 	lldb $(NAME) $(INPT)
+
+asan:
+	$(CC) -fsanitize=address -static-libsan -fno-omit-frame-pointer $(FLAGS) $(NAME) $(SRC) $(LIB) $(INC)
+	bash check.sh
 
 check:
 	bash check.sh

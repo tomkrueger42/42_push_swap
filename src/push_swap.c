@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/16 17:31:34 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/17 01:16:13 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	struct s_head	*head;
 
-	head = ft_calloc(1, sizeof(head));
+	head = ft_calloc(1, sizeof(struct s_head));
 	if (head == NULL)
 		return (0);
 	input_conversion(argc, argv, head);

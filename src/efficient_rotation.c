@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   efficient_rotation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:22:20 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/12/16 13:55:38 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/17 01:15:14 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
 /* This f() parses through the src stack and then calls best_rotate() */
-void efficient_rotation(struct s_node *lis_start, struct s_node *src,
+void	efficient_rotation(struct s_node *lis_start, struct s_node *src,
 	struct s_node *dst, struct s_head *head)
 {
-	struct s_rotation *r;
+	struct s_rotation	*r;
 
 	r = ft_calloc(1, sizeof(struct s_rotation));
 	if (r == NULL)
@@ -27,7 +27,7 @@ void efficient_rotation(struct s_node *lis_start, struct s_node *src,
 	while (r->r_src < lst_size(src))
 	{
 		if (part_of_lis(lis_start, src) == 0)
-			set_rotations(r, src, dst);
+			set_r(r, src, dst);
 		r->r_src++;
 		src = src->next;
 	}
@@ -36,11 +36,15 @@ void efficient_rotation(struct s_node *lis_start, struct s_node *src,
 }
 
 /* This f() sets and saves the minimum amount of rotations */
-void	set_rotations(struct s_rotation *r, struct s_node *src, struct s_node *dst)
+void	set_r(struct s_rotation *r, struct s_node *src, struct s_node *dst)
 {
-	r->rr_src = r->r_src == 0 ? 0 : lst_size(src) - r->r_src;
+	r->rr_src = 0;
+	if (r->r_src != 0)
+		r->rr_src = lst_size(src) - r->r_src;
 	r->r_dst = find_right_position(src, dst);
-	r->rr_dst = r->r_dst == 0 ? 0 : lst_size(dst) - r->r_dst;
+	r->rr_dst = 0;
+	if (r->r_dst != 0)
+		r->rr_dst = lst_size(dst) - r->r_dst;
 	r->x_src = r->r_src < r->rr_src ? r->r_src : -r->rr_src;
 	r->x_dst = r->r_dst < r->rr_dst ? r->r_dst : -r->rr_dst;
 

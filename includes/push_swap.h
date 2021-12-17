@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/16 17:31:47 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/17 01:09:46 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct	s_rotation
 int				main(int argc, char **argv);
 void			input_conversion(int argc, char **argv, struct s_head *head);
 void			assign_indeces(struct s_head *head);
+void			merge_to_stack_a(struct s_head *head);
 
 /* print.c */
 
@@ -87,6 +88,7 @@ void			revrotate(char c, struct s_head *head);
 
 int				lst_size(struct s_node *start);
 void			insert_node(int content, struct s_head *head);
+int				find_right_position(struct s_node *node, struct s_node *dst);
 void			free_exit(char *errormsg, int exit_code, struct s_head *head);
 void			free_cdll(struct s_node *node);
 
@@ -99,17 +101,15 @@ int				part_of_lis(struct s_node *lis_start, struct s_node *node);
 /* efficient_rotation.c */
 
 void			efficient_rotation(struct s_node *lis_start, struct s_node *src, struct s_node *dst, struct s_head *head);
-void			set_rotations(struct s_rotation *r, struct s_node *src, struct s_node *dst);
+void			set_r(struct s_rotation *r, struct s_node *src, struct s_node *dst);
 void			best_rotate(struct s_rotation *r, struct s_node *src, struct s_head *head);
 void			best_revrotate(struct s_rotation *r, struct s_node *src, struct s_head *head);
 void			best_x_rotate(struct s_rotation *r, struct s_node *src, struct s_head *head);
 
 /* sort.c */
 
-int				find_right_position(struct s_node *node, struct s_node *dst);
 
 /* merge.c */
 
-void			merge_to_stack_a(struct s_head *head);
 
 #endif
