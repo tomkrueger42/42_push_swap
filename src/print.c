@@ -1,10 +1,10 @@
 #include "../includes/push_swap.h"
 
 /* This f() prints out stacks a & b and the instruction stack to stdout */
-void	print_go_brrrrr(struct s_head *head)
+void	print_go_brrrrr(t_head *head)
 {
-	struct s_node *a_parser;
-	struct s_node *b_parser;
+	t_node *a_parser;
+	t_node *b_parser;
 
 	a_parser = head->a != NULL ? head->a->next : NULL;
 	b_parser = head->b != NULL ? head->b->next : NULL;
@@ -34,8 +34,8 @@ void	print_go_brrrrr(struct s_head *head)
 	printf("\n------------------------------\n");
 }
 
-/* This f() prints out the rotations stored in struct s_rotation *r */
-void	print_r(struct s_rotation *r, bool print_min)
+/* This f() prints out the rotations stored in t_rotation *r */
+void	print_r(t_rotation *r, bool print_min)
 {
 	printf("r_src: %i\n", 		r->r_src);
 	printf("rr_src: %i\n", 		r->rr_src);

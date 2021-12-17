@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/17 01:16:13 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/17 01:23:49 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	main(int argc, char **argv)
 {
-	struct s_head	*head;
+	t_head	*head;
 
-	head = ft_calloc(1, sizeof(struct s_head));
+	head = ft_calloc(1, sizeof(t_head));
 	if (head == NULL)
 		return (0);
 	input_conversion(argc, argv, head);
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 }
 
 /* This f() converts the char **argv into a stack and checks for errors */
-void	input_conversion(int argc, char **argv, struct s_head *head)
+void	input_conversion(int argc, char **argv, t_head *head)
 {
 	char	**input;
 	int		i;
@@ -57,10 +57,10 @@ void	input_conversion(int argc, char **argv, struct s_head *head)
 
 /* This f() assigns indices for each element for easier comparison while
 checking for doubles*/
-void	assign_indeces(struct s_head *head)
+void	assign_indeces(t_head *head)
 {
-	struct s_node	*parser;
-	struct s_node	*lowest;
+	t_node	*parser;
+	t_node	*lowest;
 	int				i;
 	int				j;
 
@@ -85,9 +85,9 @@ void	assign_indeces(struct s_head *head)
 }
 
 /* This f() merges both stacks onto stack a sorted */
-void	merge_to_stack_a(struct s_head *head)
+void	merge_to_stack_a(t_head *head)
 {
-	struct s_node	*parser;
+	t_node	*parser;
 	int				i;
 
 	i = 0;

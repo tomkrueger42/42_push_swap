@@ -6,19 +6,19 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:22:20 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/12/17 01:15:14 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/17 01:36:25 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
 /* This f() parses through the src stack and then calls best_rotate() */
-void	efficient_rotation(struct s_node *lis_start, struct s_node *src,
-	struct s_node *dst, struct s_head *head)
+void	efficient_rotation(t_node *lis_start, t_node *src,
+	t_node *dst, t_head *head)
 {
-	struct s_rotation	*r;
+	t_rotation	*r;
 
-	r = ft_calloc(1, sizeof(struct s_rotation));
+	r = ft_calloc(1, sizeof(t_rotation));
 	if (r == NULL)
 		free_exit("Error\n", EXIT_FAILURE, head);
 	r->m_r_src = INT32_MAX;
@@ -31,12 +31,12 @@ void	efficient_rotation(struct s_node *lis_start, struct s_node *src,
 		r->r_src++;
 		src = src->next;
 	}
-	best_rotate(r, src, head);
+	best_r(r, src, head);
 	free(r);
 }
 
 /* This f() sets and saves the minimum amount of rotations */
-void	set_r(struct s_rotation *r, struct s_node *src, struct s_node *dst)
+void	set_r(t_rotation *r, t_node *src, t_node *dst)
 {
 	r->rr_src = 0;
 	if (r->r_src != 0)
@@ -45,9 +45,8 @@ void	set_r(struct s_rotation *r, struct s_node *src, struct s_node *dst)
 	r->rr_dst = 0;
 	if (r->r_dst != 0)
 		r->rr_dst = lst_size(dst) - r->r_dst;
-	r->x_src = r->r_src < r->rr_src ? r->r_src : -r->rr_src;
-	r->x_dst = r->r_dst < r->rr_dst ? r->r_dst : -r->rr_dst;
-
+	r->x_src = X_ROT(r->r_src, r->rr_src);
+	r->x_dst = X_ROT(r->r_dst, r->rr_dst);
 	if (MAX(r->r_src, r->r_dst) < MAX(r->m_r_src, r->m_r_dst))
 	{
 		r->m_r_src = r->r_src;
@@ -66,7 +65,7 @@ void	set_r(struct s_rotation *r, struct s_node *src, struct s_node *dst)
 }
 
 /* This f() executes the best rotation and calls others when needed */
-void	best_rotate(struct s_rotation *r, struct s_node *src, struct s_head *head)
+void	best_r(t_rotation *r, t_node *src, t_head *head)
 {
 	char	c;
 
@@ -93,7 +92,7 @@ void	best_rotate(struct s_rotation *r, struct s_node *src, struct s_head *head)
 }
 
 /* This f() executes the best rev rotation and calls best_x_rotation when needed */
-void	best_revrotate(struct s_rotation *r, struct s_node *src, struct s_head *head)
+void	best_revrotate(t_rotation *r, t_node *src, t_head *head)
 {
 	char	c;
 
@@ -118,7 +117,7 @@ void	best_revrotate(struct s_rotation *r, struct s_node *src, struct s_head *hea
 }
 
 /* This f() executes the best cross-rotation */
-void	best_x_rotate(struct s_rotation *r, struct s_node *src, struct s_head *head)
+void	best_x_rotate(t_rotation *r, t_node *src, t_head *head)
 {
 	char	c;
 

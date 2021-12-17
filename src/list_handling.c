@@ -6,16 +6,16 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:43:18 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/17 01:15:31 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/17 01:23:40 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
 /* This f() returns the size of the list */
-int	lst_size(struct s_node *start)
+int	lst_size(t_node *start)
 {
-	struct s_node	*parser;
+	t_node	*parser;
 	int				i;
 
 	i = 1;
@@ -31,11 +31,11 @@ int	lst_size(struct s_node *start)
 }
 
 /* This f() inserts a new node before prev_node */
-void	insert_node(int content, struct s_head *head)
+void	insert_node(int content, t_head *head)
 {
-	struct s_node	*new;
+	t_node	*new;
 
-	new = ft_calloc(1, sizeof(struct s_node));
+	new = ft_calloc(1, sizeof(t_node));
 	if (new == NULL)
 		free_exit("malloc failure\n", EXIT_FAILURE, head);
 	if (head->a == NULL)
@@ -57,7 +57,7 @@ void	insert_node(int content, struct s_head *head)
 }
 
 /* This f() finds the right position for *node in stack *dst */
-int	find_right_position(struct s_node *node, struct s_node *dst)
+int	find_right_position(t_node *node, t_node *dst)
 {
 	int	i;
 
@@ -77,7 +77,7 @@ int	find_right_position(struct s_node *node, struct s_node *dst)
 }
 
 /* This f() frees the stack and puts an error message to FILE_DESCRIPTOR */
-void	free_exit(char *errormsg, int exit_code, struct s_head *head)
+void	free_exit(char *errormsg, int exit_code, t_head *head)
 {
 	//printf("head: %p\n", head);
 	free_cdll(head->a);
@@ -87,9 +87,9 @@ void	free_exit(char *errormsg, int exit_code, struct s_head *head)
 	exit(exit_code);
 }
 
-void	free_cdll(struct s_node *node)
+void	free_cdll(t_node *node)
 {
-	struct s_node	*tmp;
+	t_node	*tmp;
 
 	if (node == NULL)
 		return ;

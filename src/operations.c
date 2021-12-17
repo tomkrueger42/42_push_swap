@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 18:01:15 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/16 15:26:49 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/17 01:23:58 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
 /* This f() executes the swap operation */
-int	swap(char c, struct s_head *head)
+int	swap(char c, t_head *head)
 {
-	struct s_node	*node;
+	t_node	*node;
 
 	if (c == 'a' || c == 'A')
 	{
@@ -44,7 +44,7 @@ int	swap(char c, struct s_head *head)
 }
 
 /* This f() executes the push operation */
-void	push(char c, struct s_head *head)
+void	push(char c, t_head *head)
 {
 	if (c == 'a' /* && head->a != NULL */)
 	{
@@ -59,7 +59,7 @@ void	push(char c, struct s_head *head)
 }
 
 /* This f() assists with the push operation */
-struct s_node	*push_it(struct s_node **src, struct s_node **dst)
+t_node	*push_it(t_node **src, t_node **dst)
 {
 	if ((*dst) == NULL)
 	{
@@ -88,7 +88,7 @@ struct s_node	*push_it(struct s_node **src, struct s_node **dst)
 }
 
 /* This f() executes the rotate operation */
-void	rotate(char c, struct s_head *head)
+void	rotate(char c, t_head *head)
 {
 	if ((c == 'a' || c == 'A') && head->a != NULL)
 	{
@@ -111,7 +111,7 @@ void	rotate(char c, struct s_head *head)
 }
 
 /* This f() executes the revrotate operation */
-void	revrotate(char c, struct s_head *head)
+void	revrotate(char c, t_head *head)
 {
 	if ((c == 'a' || c == 'A') && head->a != NULL)
 	{
