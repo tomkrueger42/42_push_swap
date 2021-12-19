@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/17 01:23:49 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/19 21:29:01 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	input_conversion(int argc, char **argv, t_head *head)
 		input = &argv[1];
 	while (input[i] != NULL)
 	{
-		if (ft_strncmp(input[i], ft_itoa(ft_atoi(input[i])), ft_strlen(input[i])) != 0)
+		if (ft_strncmp(input[i], ft_itoa(ft_atoi(input[i])),
+				ft_strlen(input[i])) != 0)
 			free_exit("Error\n", EXIT_FAILURE, head);
 		else
 			insert_node(ft_atoi(input[i]), head);
@@ -61,8 +62,8 @@ void	assign_indeces(t_head *head)
 {
 	t_node	*parser;
 	t_node	*lowest;
-	int				i;
-	int				j;
+	int		i;
+	int		j;
 
 	i = 0;
 	parser = head->a;
@@ -72,9 +73,11 @@ void	assign_indeces(t_head *head)
 		j = 0;
 		while (j < lst_size(head->a))
 		{
-			if ((lowest == NULL || lowest->content > parser->content) && parser->index == -1)
+			if ((lowest == NULL || lowest->content > parser->content)
+				&& parser->index == -1)
 				lowest = parser;
-			else if (lowest != NULL && lowest->content == parser->content && parser->index == -1 && ALLOW_DOUBLES == 0)
+			else if (lowest != NULL && lowest->content == parser->content
+				&& parser->index == -1 && ALLOW_DOUBLES == 0)
 				free_exit("Error\n", EXIT_FAILURE, head);
 			parser = parser->next;
 			j++;
@@ -88,9 +91,8 @@ void	assign_indeces(t_head *head)
 void	merge_to_stack_a(t_head *head)
 {
 	t_node	*parser;
-	int				i;
+	int		i;
 
-	i = 0;
 	while (head->b != NULL)
 	{
 		efficient_rotation(NULL, head->b, head->a, head);
@@ -103,7 +105,8 @@ void	merge_to_stack_a(t_head *head)
 		parser = parser->next;
 		i++;
 	}
-	i = i <= lst_size(head->a) / 2 ? i : -(lst_size(head->a) - i);
+	if (i > lst_size(head->a) / 2)
+		i = -i;
 	while (i > 0 && i--)
 		rotate('a', head);
 	while (i < 0 && i++)

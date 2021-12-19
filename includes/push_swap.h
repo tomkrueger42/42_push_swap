@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/17 01:33:48 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/19 21:31:19 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,44 +25,36 @@
 # define ALLOW_DOUBLES 0
 # define FILE_DESCRIPTOR 1
 
-/* further macros */
-
-#define MIN(a, b) (a < b ? a : b)
-#define MAX(a, b) (a > b ? a : b)
-#define DIFF(a, b) (a > b ? a - b : b - a)
-#define X_ROT(a, b) (a < b ? a : -b)
-#define ABS(a) (a >= 0 ? a : -a)
-
 /* structs */
 
 typedef struct	s_head
 {
-	t_node	*a;
-	t_node	*b;
-}				t_head;
+	struct s_node	*a;
+	struct s_node	*b;
+}	t_head;
 
 typedef struct	s_node
 {
-	int					content;
-	int					index;
-	t_node		*next;
-	t_node		*prev;
-}				t_node;
+	int				content;
+	int				index;
+	struct s_node	*next;
+	struct s_node	*prev;
+}	t_node;
 
 typedef struct	s_rotation
 {
-	int				r_src;
-	int				rr_src;
-	int				r_dst;
-	int				rr_dst;
-	int				x_src;
-	int				x_dst;
-	int				m_r_src;
-	int				m_rr_src;
-	int				m_r_dst;
-	int				m_rr_dst;
-	int				m_x_src;
-	int				m_x_dst;
+	int				r_s;
+	int				rr_s;
+	int				r_d;
+	int				rr_d;
+	int				x_s;
+	int				x_d;
+	int				m_r_s;
+	int				m_rr_s;
+	int				m_r_d;
+	int				m_rr_d;
+	int				m_x_s;
+	int				m_x_d;
 }				t_rotation;
 
 /* push_swap.c */
@@ -101,11 +93,11 @@ int				part_of_lis(t_node *lis_start, t_node *node);
 
 /* efficient_rotation.c */
 
-void			efficient_rotation(t_node *lis_start, t_node *src, t_node *dst, t_head *head);
-void			set_r(t_rotation *r, t_node *src, t_node *dst);
-void			best_rotate(t_rotation *r, t_node *src, t_head *head);
-void			best_revrotate(t_rotation *r, t_node *src, t_head *head);
-void			best_x_rotate(t_rotation *r, t_node *src, t_head *head);
+void			efficient_rotation(t_node *lis_start, t_node *s, t_node *d, t_head *head);
+void			set_r(t_rotation *r, t_node *s, t_node *d);
+void			best_rotate(t_rotation *r, t_node *s, t_head *head);
+void			best_revrotate(t_rotation *r, t_node *s, t_head *head);
+void			best_x_rotate(t_rotation *r, t_node *s, t_head *head);
 
 /* sort.c */
 

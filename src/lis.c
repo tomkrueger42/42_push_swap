@@ -6,19 +6,20 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:05:40 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/12/17 01:23:29 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/19 21:34:24 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-/* This f() finds the longest increasing sub-sequence in stack a and isolates that with push_sorted() */
-void lis(t_head *head)
+/* This f() finds the longest increasing sub-sequence in stack a and isolates
+that with push_sorted() */
+void	lis(t_head *head)
 {
-	t_node *parser;
-	t_node *lis_start;
-	int lis_len;
-	int i;
+	t_node	*parser;
+	t_node	*lis_start;
+	int		lis_len;
+	int		i;
 
 	lis_len = 0;
 	while (lst_size(head->a) > lis_len)
@@ -42,11 +43,11 @@ void lis(t_head *head)
 }
 
 /* This f() returns the length of an increasing subsequence */
-int increasing_subsequence(t_node *lis_start)
+int	increasing_subsequence(t_node *lis_start)
 {
-	t_node *parser;
-	int benchmark;
-	int i;
+	t_node	*parser;
+	int		benchmark;
+	int		i;
 
 	parser = lis_start->next;
 	benchmark = lis_start->index;
@@ -64,10 +65,10 @@ int increasing_subsequence(t_node *lis_start)
 }
 
 /* This f() checks whether or not *node is part of the *lis_start lis */
-int part_of_lis(t_node *lis_start, t_node *node)
+int	part_of_lis(t_node *lis_start, t_node *node)
 {
-	t_node *parser;
-	int benchmark;
+	t_node	*parser;
+	int		benchmark;
 
 	if (lis_start == NULL)
 		return (0);

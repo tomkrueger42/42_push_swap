@@ -37,18 +37,18 @@ void	print_go_brrrrr(t_head *head)
 /* This f() prints out the rotations stored in t_rotation *r */
 void	print_r(t_rotation *r, bool print_min)
 {
-	printf("r_src: %i\n", 		r->r_src);
-	printf("rr_src: %i\n", 		r->rr_src);
-	printf("r_dst: %i\n", 		r->r_dst);
-	printf("rr_dst: %i\n", 		r->rr_dst);
-	printf("x_src: %i\n", 		r->x_src);
-	printf("x_dst: %i\n", 		r->x_dst);
+	printf("r_s: %i\n", 		r->r_s);
+	printf("rr_s: %i\n", 		r->rr_s);
+	printf("r_d: %i\n", 		r->r_d);
+	printf("rr_d: %i\n", 		r->rr_d);
+	printf("x_s: %i\n", 		r->x_s);
+	printf("x_d: %i\n", 		r->x_d);
 	if (print_min == false)
 		return ;
-	printf("m_r_src: %i\n",		r->m_r_src);
-	printf("m_rr_src: %i\n",	r->m_rr_src);
-	printf("m_r_dst: %i\n",		r->m_r_dst);
-	printf("m_rr_dst: %i\n",	r->m_rr_dst);
-	printf("m_x_src: %i\n",		r->m_x_src);
-	printf("m_x_dst: %i\n",		r->m_x_dst);
+	printf("m_r_s: %i\n",		r->m_r_s);
+	printf("m_rr_s: %i\n",	r->m_rr_s);
+	printf("m_r_d: %i\n",		r->m_r_d);
+	printf("m_rr_d: %i\n",	r->m_rr_d);
+	printf("m_x_s: %i\n",		r->m_x_s);
+	printf("m_x_d: %i\n",		r->m_x_d);
 }

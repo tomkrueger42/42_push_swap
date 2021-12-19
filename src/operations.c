@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 18:01:15 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/17 01:23:58 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/19 21:38:40 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ int	swap(char c, t_head *head)
 		if (c == 'b')
 			ft_putstr_fd("sb\n", FILE_DESCRIPTOR);
 	}
-	if (c == 's' && swap('A', head) && swap('B', head)
-		&& ft_putstr_fd("ss\n", FILE_DESCRIPTOR))
-		return 0;
+	if (c == 's' && swap('A', head) && swap('B', head) && ft_putstr_fd("ss\n", FILE_DESCRIPTOR))
+		return (0);
 	node->prev->next = node->next;
 	node->next->next->prev = node;
 	node->next->prev = node->prev;
@@ -46,12 +45,12 @@ int	swap(char c, t_head *head)
 /* This f() executes the push operation */
 void	push(char c, t_head *head)
 {
-	if (c == 'a' /* && head->a != NULL */)
+	if (c == 'a')
 	{
 		head->a = push_it(&head->b, &head->a);
 		ft_putstr_fd("pa\n", FILE_DESCRIPTOR);
 	}
-	else if (c == 'b'/*  && head->b != NULL */)
+	else if (c == 'b')
 	{
 		head->b = push_it(&head->a, &head->b);
 		ft_putstr_fd("pb\n", FILE_DESCRIPTOR);

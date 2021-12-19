@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:43:18 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/17 01:23:40 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/19 21:39:10 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	lst_size(t_node *start)
 {
 	t_node	*parser;
-	int				i;
+	int		i;
 
 	i = 1;
 	if (start == NULL)
@@ -68,7 +68,7 @@ int	find_right_position(t_node *node, t_node *dst)
 	{
 		if ((dst->prev->index < node->index && node->index < dst->index)
 			|| ((dst->prev->index < node->index || node->index < dst->index)
-			&& dst->index < dst->prev->index))
+				&& dst->index < dst->prev->index))
 			return (i);
 		dst = dst->next;
 		i++;
@@ -79,7 +79,6 @@ int	find_right_position(t_node *node, t_node *dst)
 /* This f() frees the stack and puts an error message to FILE_DESCRIPTOR */
 void	free_exit(char *errormsg, int exit_code, t_head *head)
 {
-	//printf("head: %p\n", head);
 	free_cdll(head->a);
 	free_cdll(head->b);
 	ft_putstr_fd(errormsg, FILE_DESCRIPTOR);
@@ -96,7 +95,6 @@ void	free_cdll(t_node *node)
 	node->prev->next = NULL;
 	while (node != NULL)
 	{
-		//printf("%p\n", node);
 		tmp = node->next;
 		node->next = NULL;
 		node->prev = NULL;
