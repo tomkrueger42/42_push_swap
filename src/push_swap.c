@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/19 21:29:01 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/20 18:14:04 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,10 @@ void	input_conversion(int argc, char **argv, t_head *head)
 		input = &argv[1];
 	while (input[i] != NULL)
 	{
-		if (ft_strncmp(input[i], ft_itoa(ft_atoi(input[i])),
-				ft_strlen(input[i])) != 0)
-			free_exit("Error\n", EXIT_FAILURE, head);
-		else
+		if (ft_isint(input[i]))
 			insert_node(ft_atoi(input[i]), head);
+		else
+			free_exit("Error\n", EXIT_FAILURE, head);
 		i++;
 	}
 	i = 0;
