@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/21 17:20:02 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/21 17:42:25 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,6 @@ typedef struct s_rotation
 	int				rr_d;
 	int				x_s;
 	int				x_d;
-	int				m_r_s;
-	int				m_rr_s;
-	int				m_r_d;
-	int				m_rr_d;
-	int				m_x_s;
-	int				m_x_d;
 }				t_rotation;
 
 /* push_swap.c */
@@ -69,7 +63,7 @@ void			sort_small(t_head *head);
 /* print.c */
 
 void			print_go_brrrrr(t_head *head);
-void			ridin_the_rollercoaster(t_rotation *rollercoaster, bool put_m);
+void			print_r(t_rotation *r, t_rotation *ben, bool print_ben);
 
 /* operations.c */
 
@@ -98,7 +92,8 @@ int				part_of_lis(t_node *lis_start, t_node *node);
 
 void			efficient_rotation(t_node *lis_start, t_node *s, t_node *d,
 					t_head *head);
-void			set_r(t_rotation *r, t_node *s, t_node *d);
+void			set_r(t_rotation *r, t_rotation *ben, t_node *s, t_node *d);
+void			benchmark(t_rotation *r, t_rotation *ben);
 void			best_rotate(t_rotation *r, t_node *s, t_head *head);
 void			best_revrotate(t_rotation *r, t_node *s, t_head *head);
 void			best_x_rotate(t_rotation *r, t_node *s, t_head *head);

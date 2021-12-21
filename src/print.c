@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:20:53 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/20 18:21:50 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/21 17:41:04 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	print_go_brrrrr(t_head *head)
 }
 
 /* This f() prints out the rotations stored in t_rotation *r */
-void	print_r(t_rotation *r, bool print_min)
+void	print_r(t_rotation *r, t_rotation *ben, bool print_ben)
 {
 	printf("r_s: %i\n", r->r_s);
 	printf("rr_s: %i\n", r->rr_s);
@@ -55,12 +55,12 @@ void	print_r(t_rotation *r, bool print_min)
 	printf("rr_d: %i\n", r->rr_d);
 	printf("x_s: %i\n", r->x_s);
 	printf("x_d: %i\n", r->x_d);
-	if (print_min == false)
+	if (print_ben == false)
 		return ;
-	printf("m_r_s: %i\n", r->m_r_s);
-	printf("m_rr_s: %i\n", r->m_rr_s);
-	printf("m_r_d: %i\n", r->m_r_d);
-	printf("m_rr_d: %i\n", r->m_rr_d);
-	printf("m_x_s: %i\n", r->m_x_s);
-	printf("m_x_d: %i\n", r->m_x_d);
+	printf("benchmark r_s: %i\n", ben->r_s);
+	printf("benchmark rr_s: %i\n", ben->rr_s);
+	printf("benchmark r_d: %i\n", ben->r_d);
+	printf("benchmark rr_d: %i\n", ben->rr_d);
+	printf("benchmark x_s: %i\n", ben->x_s);
+	printf("benchmark x_d: %i\n", ben->x_d);
 }
