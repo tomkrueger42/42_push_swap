@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:22:20 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/12/19 21:33:03 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/21 17:21:23 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ void	best_rotate(t_rotation *r, t_node *s, t_head *head)
 		c = s == head->a ? 'b' : 'a';
 	while (ft_min(2, r->m_r_s, r->m_r_d) > 0)
 	{
-		rotate('r', head);
+		rotate('r', true, head);
 		r->m_r_s--;
 		r->m_r_d--;
 	}
 	while (ft_max(2, r->m_r_s, r->m_r_d) > 0)
 	{
-		rotate(c, head);
+		rotate(c, true, head);
 		r->m_r_s--;
 		r->m_r_d--;
 	}
@@ -111,13 +111,13 @@ void	best_revrotate(t_rotation *r, t_node *s, t_head *head)
 		c = s == head->a ? 'b' : 'a';
 	while (ft_min(2, r->m_rr_s, r->m_rr_d) > 0)
 	{
-		revrotate('r', head);
+		revrotate('r', true, head);
 		r->m_rr_s--;
 		r->m_rr_d--;
 	}
 	while (ft_max(2, r->m_rr_s, r->m_rr_d) > 0)
 	{
-		revrotate(c, head);
+		revrotate(c, true, head);
 		r->m_rr_s--;
 		r->m_rr_d--;
 	}
@@ -131,23 +131,23 @@ void	best_x_rotate(t_rotation *r, t_node *s, t_head *head)
 	c = s == head->a ? 'a' : 'b';
 	while (r->m_x_s > 0)
 	{
-		rotate(c, head);
+		rotate(c, true, head);
 		r->m_x_s--;
 	}
 	while (r->m_x_s < 0)
 	{
-		revrotate(c, head);
+		revrotate(c, true, head);
 		r->m_x_s++;
 	}
 	c = c == 'a' ? 'b' : 'a';
 	while (r->m_x_d > 0)
 	{
-		rotate(c, head);
+		rotate(c, true, head);
 		r->m_x_d--;
 	}
 	while (r->m_x_d < 0)
 	{
-		revrotate(c, head);
+		revrotate(c, true, head);
 		r->m_x_d++;
 	}
 }

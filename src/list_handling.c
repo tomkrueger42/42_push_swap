@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:43:18 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/20 23:45:14 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/21 17:25:38 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	insert_node(int content, t_head *head)
 
 	new = ft_calloc(1, sizeof(t_node));
 	if (new == NULL)
-		free_exit("malloc failure\n", EXIT_FAILURE, head);
+		free_exit("Error\n", EXIT_FAILURE, head);
 	if (head->a == NULL)
 	{
 		head->a = new;

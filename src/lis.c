@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:05:40 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/12/19 21:34:24 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/21 17:21:34 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	lis(t_head *head)
 		if (lis_len == lst_size(parser))
 			break ;
 		efficient_rotation(lis_start, head->a, head->b, head);
-		push('b', head);
+		push('b', true, head);
 	}
 }
 

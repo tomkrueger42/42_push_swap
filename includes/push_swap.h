@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/21 01:36:48 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/21 17:20:02 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@
 
 /* structs */
 
-typedef struct	s_head
+typedef struct s_head
 {
 	struct s_node	*a;
 	struct s_node	*b;
 }	t_head;
 
-typedef struct	s_node
+typedef struct s_node
 {
 	int				content;
 	int				index;
@@ -41,7 +41,7 @@ typedef struct	s_node
 	struct s_node	*prev;
 }	t_node;
 
-typedef struct	s_rotation
+typedef struct s_rotation
 {
 	int				r_s;
 	int				rr_s;
@@ -69,15 +69,16 @@ void			sort_small(t_head *head);
 /* print.c */
 
 void			print_go_brrrrr(t_head *head);
-void			ridin_the_rollercoaster(t_rotation *rollercoaster, bool print_min);
+void			ridin_the_rollercoaster(t_rotation *rollercoaster, bool put_m);
 
 /* operations.c */
 
-void			swap(char c, t_head *head);
-void			push(char c, t_head *head);
+void			swap(char c, bool print, t_head *head);
+void			swap_it(t_node *node);
+void			push(char c, bool print, t_head *head);
 t_node			*push_it(t_node **src, t_node **dst);
-void			rotate(char c, t_head *head);
-void			revrotate(char c, t_head *head);
+void			rotate(char c, bool print, t_head *head);
+void			revrotate(char c, bool print, t_head *head);
 
 /* list_handling.c */
 
@@ -95,16 +96,11 @@ int				part_of_lis(t_node *lis_start, t_node *node);
 
 /* efficient_rotation.c */
 
-void			efficient_rotation(t_node *lis_start, t_node *s, t_node *d, t_head *head);
+void			efficient_rotation(t_node *lis_start, t_node *s, t_node *d,
+					t_head *head);
 void			set_r(t_rotation *r, t_node *s, t_node *d);
 void			best_rotate(t_rotation *r, t_node *s, t_head *head);
 void			best_revrotate(t_rotation *r, t_node *s, t_head *head);
 void			best_x_rotate(t_rotation *r, t_node *s, t_head *head);
-
-/* sort.c */
-
-
-/* merge.c */
-
 
 #endif

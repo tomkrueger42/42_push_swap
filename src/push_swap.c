@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/21 13:04:37 by tomkrueger       ###   ########.fr       */
+/*   Updated: 2021/12/21 17:28:59 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ int	main(int argc, char **argv)
 	head = ft_calloc(1, sizeof(t_head));
 	if (head == NULL)
 		return (0);
+	if (argc < 2)
+		free_exit("", EXIT_FAILURE, head);
 	input_conversion(argc, argv, head);
 	assign_indeces(head);
 	if (lst_size(head->a) <= 5)
 		sort_small(head);
 	else
-	{
 		(void)lis(head);
-		merge_to_stack_a(head);
-	}
+	merge_to_stack_a(head);
 	free_exit("", EXIT_SUCCESS, head);
 }
 
@@ -57,7 +57,7 @@ void	input_conversion(int argc, char **argv, t_head *head)
 			free(input[i++]);
 		free(input);
 	}
-	rotate('A', head);
+	rotate('a', false, head);
 }
 
 /* This f() assigns indices for each element for easier comparison while
@@ -93,15 +93,11 @@ void	assign_indeces(t_head *head)
 
 void	sort_small(t_head *head)
 {
-
-/* THIS IS NOT WORKING YET JUST RUN IT WITH THE SAME CHECK TOMORROW AGAIN */
-
 	if (lst_size(head->a) == 3)
 		sort_three(head, true);
 	while (lst_size(head->a) > 3)
-		push('b', head);
+		push('b', true, head);
 	sort_three(head, false);
-	merge_to_stack_a(head);
 }
 
 /* This f() sorts stack a best when stack has <= 3 nodes. Subject somehow
@@ -114,23 +110,23 @@ void	sort_three(t_head *head, bool weird_requirements)
 	i = 1;
 	if (head->a->index < head->a->next->index && head->a->next->index
 		> head->a->prev->index && head->a->index < head->a->prev->index && i++)
-		swap('a', head);
+		swap('a', true, head);
 	else if (head->a->index > head->a->next->index && head->a->next->index
 		< head->a->prev->index && head->a->index < head->a->prev->index && i++)
-		swap('a', head);
+		swap('a', true, head);
 	else if (head->a->index > head->a->next->index && head->a->next->index
 		> head->a->prev->index && head->a->index > head->a->prev->index && i++)
-		swap('a', head);
+		swap('a', true, head);
 	if (head->a->index > head->a->next->index && head->a->index
 		> head->a->prev->index && i++)
-		rotate('a', head);
+		rotate('a', true, head);
 	else if (head->a->index < head->a->next->index && head->a->index
 		> head->a->prev->index && i++)
-		revrotate('a', head);
+		revrotate('a', true, head);
 	if (i <= 2 && weird_requirements == true)
 	{
-		swap('b', head);
-		swap('b', head);
+		swap('a', true, head);
+		swap('a', true, head);
 	}
 }
 
@@ -145,7 +141,7 @@ void	merge_to_stack_a(t_head *head)
 		/* if (lst_size(head->a) <= 5)
 			printf("hello\n"); */
 		efficient_rotation(NULL, head->b, head->a, head);
-		push('a', head);
+		push('a', true, head);
 	}
 	//print_go_brrrrr(head);
 	i = 0;
@@ -158,8 +154,8 @@ void	merge_to_stack_a(t_head *head)
 	if (i > lst_size(head->a) / 2)
 		i = -lst_size(head->a) + i;
 	while (i > 0 && i--)
-		rotate('a', head);
+		rotate('a', true, head);
 	while (i < 0 && i++)
-		revrotate('a', head);
+		revrotate('a', true, head);
 	//print_go_brrrrr(head);
 }

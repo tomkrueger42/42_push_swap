@@ -6,38 +6,33 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 18:01:15 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/21 00:37:51 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/21 17:30:00 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	swap_it(t_node *node);
-
 /* This f() executes the swap operation */
-void	swap(char c, t_head *head)
+void	swap(char c, bool print, t_head *head)
 {
-	if (c == 'a' || c == 'A')
+	if (c == 'a')
 	{
 		head->a = head->a->next;
 		swap_it(head->a->prev);
-		if (c == 'a')
+		if (print)
 			ft_putstr_fd("sa\n", FILE_DESCRIPTOR);
 	}
-	else if (c == 'b' || c == 'B')
+	else if (c == 'b')
 	{
-		if (head->b != NULL)
-		{
-			head->b = head->b->next;
-			swap_it(head->b->prev);
-		}
-		if (c == 'b')
+		head->b = head->b->next;
+		swap_it(head->b->prev);
+		if (print)
 			ft_putstr_fd("sb\n", FILE_DESCRIPTOR);
 	}
 	if (c == 's')
 	{
-		swap('A', head);
-		swap('B', head);
+		swap('a', false, head);
+		swap('b', false, head);
 		ft_putstr_fd("ss\n", FILE_DESCRIPTOR);
 	}
 }
@@ -53,17 +48,19 @@ void	swap_it(t_node *node)
 }
 
 /* This f() executes the push operation */
-void	push(char c, t_head *head)
+void	push(char c, bool print, t_head *head)
 {
 	if (c == 'a')
 	{
 		head->a = push_it(&head->b, &head->a);
-		ft_putstr_fd("pa\n", FILE_DESCRIPTOR);
+		if (print)
+			ft_putstr_fd("pa\n", FILE_DESCRIPTOR);
 	}
 	else if (c == 'b')
 	{
 		head->b = push_it(&head->a, &head->b);
-		ft_putstr_fd("pb\n", FILE_DESCRIPTOR);
+		if (print)
+			ft_putstr_fd("pb\n", FILE_DESCRIPTOR);
 	}
 }
 
@@ -97,47 +94,47 @@ t_node	*push_it(t_node **src, t_node **dst)
 }
 
 /* This f() executes the rotate operation */
-void	rotate(char c, t_head *head)
+void	rotate(char c, bool print, t_head *head)
 {
-	if ((c == 'a' || c == 'A') && head->a != NULL)
+	if (c == 'a' && head->a != NULL)
 	{
 		head->a = head->a->next;
-		if (c == 'a')
+		if (print)
 			ft_putstr_fd("ra\n", FILE_DESCRIPTOR);
 	}
-	else if ((c == 'b' || c == 'B') && head->b != NULL)
+	else if (c == 'b' && head->b != NULL)
 	{
 		head->b = head->b->next;
-		if (c == 'b')
+		if (print)
 			ft_putstr_fd("rb\n", FILE_DESCRIPTOR);
 	}
 	else if (c == 'r')
 	{
-		rotate('A', head);
-		rotate('B', head);
+		rotate('a', false, head);
+		rotate('b', false, head);
 		ft_putstr_fd("rr\n", FILE_DESCRIPTOR);
 	}
 }
 
 /* This f() executes the revrotate operation */
-void	revrotate(char c, t_head *head)
+void	revrotate(char c, bool print, t_head *head)
 {
-	if ((c == 'a' || c == 'A') && head->a != NULL)
+	if (c == 'a' && head->a != NULL)
 	{
 		head->a = head->a->prev;
-		if (c == 'a')
+		if (print)
 			ft_putstr_fd("rra\n", FILE_DESCRIPTOR);
 	}
-	else if ((c == 'b' || c == 'B') && head->b != NULL)
+	else if (c == 'b' && head->b != NULL)
 	{
 		head->b = head->b->prev;
-		if (c == 'b')
+		if (print)
 			ft_putstr_fd("rrb\n", FILE_DESCRIPTOR);
 	}
 	else if (c == 'r')
 	{
-		revrotate('A', head);
-		revrotate('B', head);
+		revrotate('a', false, head);
+		revrotate('b', false, head);
 		ft_putstr_fd("rrr\n", FILE_DESCRIPTOR);
 	}
 }
