@@ -6,40 +6,50 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 18:01:15 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/19 21:38:40 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/21 00:37:51 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-/* This f() executes the swap operation */
-int	swap(char c, t_head *head)
-{
-	t_node	*node;
+void	swap_it(t_node *node);
 
+/* This f() executes the swap operation */
+void	swap(char c, t_head *head)
+{
 	if (c == 'a' || c == 'A')
 	{
-		node = head->a;
 		head->a = head->a->next;
+		swap_it(head->a->prev);
 		if (c == 'a')
 			ft_putstr_fd("sa\n", FILE_DESCRIPTOR);
 	}
 	else if (c == 'b' || c == 'B')
 	{
-		node = head->b;
-		head->b = head->b->next;
+		if (head->b != NULL)
+		{
+			head->b = head->b->next;
+			swap_it(head->b->prev);
+		}
 		if (c == 'b')
 			ft_putstr_fd("sb\n", FILE_DESCRIPTOR);
 	}
-	if (c == 's' && swap('A', head) && swap('B', head) && ft_putstr_fd("ss\n", FILE_DESCRIPTOR))
-		return (0);
+	if (c == 's')
+	{
+		swap('A', head);
+		swap('B', head);
+		ft_putstr_fd("ss\n", FILE_DESCRIPTOR);
+	}
+}
+
+void	swap_it(t_node *node)
+{
 	node->prev->next = node->next;
 	node->next->next->prev = node;
 	node->next->prev = node->prev;
 	node->prev = node->next;
 	node->next = node->next->next;
 	node->prev->next = node;
-	return (1);
 }
 
 /* This f() executes the push operation */

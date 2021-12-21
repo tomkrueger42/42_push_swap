@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/19 21:31:19 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/21 01:36:48 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,17 @@ int				main(int argc, char **argv);
 void			input_conversion(int argc, char **argv, t_head *head);
 void			assign_indeces(t_head *head);
 void			merge_to_stack_a(t_head *head);
+void			sort_three(t_head *head, bool weird_requirements);
+void			sort_small(t_head *head);
 
 /* print.c */
 
 void			print_go_brrrrr(t_head *head);
-/* void			ridin_the_rollercoaster(t_rotation *rollercoaster, bool print_min);
- */
+void			ridin_the_rollercoaster(t_rotation *rollercoaster, bool print_min);
+
 /* operations.c */
 
-int				swap(char c, t_head *head);
+void			swap(char c, t_head *head);
 void			push(char c, t_head *head);
 t_node			*push_it(t_node **src, t_node **dst);
 void			rotate(char c, t_head *head);

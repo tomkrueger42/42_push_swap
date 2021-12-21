@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/20 18:14:04 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/21 02:12:45 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,13 @@ int	main(int argc, char **argv)
 		return (0);
 	input_conversion(argc, argv, head);
 	assign_indeces(head);
-	(void)lis(head);
-	merge_to_stack_a(head);
+	if (lst_size(head->a) <= 5)
+		sort_small(head);
+	else
+	{
+		(void)lis(head);
+		merge_to_stack_a(head);
+	}
 	free_exit("", EXIT_SUCCESS, head);
 }
 
@@ -86,6 +91,51 @@ void	assign_indeces(t_head *head)
 	}
 }
 
+void	sort_small(t_head *head)
+{
+
+/* THIS IS NOT WORKING YET JUST RUN IT WITH THE SAME CHECK TOMORROW AGAIN */
+
+	
+	while (lst_size(head->a) > 3)
+		push('b', head);
+	sort_three(head, false);
+	if (head->b->index > head->b->next->index)
+		swap('b', head);
+	print_go_brrrrr(head);
+	merge_to_stack_a(head);
+}
+
+/* This f() sorts stack a best when stack has <= 3 nodes. Subject somehow
+requires it uses either 2 OR 3 instructions that's the reason for the
+unnecessary sa instructions in the end */
+void	sort_three(t_head *head, bool weird_requirements)
+{
+	int		i;
+
+	i = 1;
+	if (head->a->index < head->a->next->index && head->a->next->index
+		> head->a->prev->index && head->a->index < head->a->prev->index && i++)
+		swap('a', head);
+	else if (head->a->index > head->a->next->index && head->a->next->index
+		< head->a->prev->index && head->a->index < head->a->prev->index && i++)
+		swap('a', head);
+	else if (head->a->index > head->a->next->index && head->a->next->index
+		> head->a->prev->index && head->a->index > head->a->prev->index && i++)
+		swap('a', head);
+	if (head->a->index > head->a->next->index && head->a->index
+		> head->a->prev->index && i++)
+		rotate('a', head);
+	else if (head->a->index < head->a->next->index && head->a->index
+		> head->a->prev->index && i++)
+		revrotate('a', head);
+	if (i <= 2 && weird_requirements == true)
+	{
+		swap('b', head);
+		swap('b', head);
+	}
+}
+
 /* This f() merges both stacks onto stack a sorted */
 void	merge_to_stack_a(t_head *head)
 {
@@ -94,20 +144,24 @@ void	merge_to_stack_a(t_head *head)
 
 	while (head->b != NULL)
 	{
+		if (lst_size(head->a) <= 5)
+			printf("hello\n");
 		efficient_rotation(NULL, head->b, head->a, head);
 		push('a', head);
 	}
+	//print_go_brrrrr(head);
 	i = 0;
 	parser = head->a;
-	while (parser->index > parser->prev->index)
+	while (parser->prev->index < parser->index)
 	{
 		parser = parser->next;
 		i++;
 	}
 	if (i > lst_size(head->a) / 2)
-		i = -i;
+		i = -lst_size(head->a) + i;
 	while (i > 0 && i--)
 		rotate('a', head);
 	while (i < 0 && i++)
 		revrotate('a', head);
+	//print_go_brrrrr(head);
 }

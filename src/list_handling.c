@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:43:18 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/20 18:18:28 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/20 23:45:14 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	find_right_position(t_node *node, t_node *dst)
 /* This f() frees the stack and puts an error message to FILE_DESCRIPTOR */
 void	free_exit(char *errormsg, int exit_code, t_head *head)
 {
-	print_go_brrrrr(head);
 	free_cdll(head->a);
 	free_cdll(head->b);
 	free(head);
