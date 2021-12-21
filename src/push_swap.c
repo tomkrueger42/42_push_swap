@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tomkrueger <tomkrueger@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/21 02:12:45 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/21 13:04:37 by tomkrueger       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,11 @@ void	sort_small(t_head *head)
 
 /* THIS IS NOT WORKING YET JUST RUN IT WITH THE SAME CHECK TOMORROW AGAIN */
 
-	
+	if (lst_size(head->a) == 3)
+		sort_three(head, true);
 	while (lst_size(head->a) > 3)
 		push('b', head);
 	sort_three(head, false);
-	if (head->b->index > head->b->next->index)
-		swap('b', head);
-	print_go_brrrrr(head);
 	merge_to_stack_a(head);
 }
 
@@ -144,8 +142,8 @@ void	merge_to_stack_a(t_head *head)
 
 	while (head->b != NULL)
 	{
-		if (lst_size(head->a) <= 5)
-			printf("hello\n");
+		/* if (lst_size(head->a) <= 5)
+			printf("hello\n"); */
 		efficient_rotation(NULL, head->b, head->a, head);
 		push('a', head);
 	}
