@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:02 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/22 01:05:28 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/22 14:03:17 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,9 @@
 /* includes */
 
 # include "../libs/libft/includes/libft.h"
-# include <stdio.h>
-# include <stdbool.h>
 
 /* change the following for manipulating the program */
 
-# define DATATYPE int
 # define ALLOW_DOUBLES 0
 # define FILE_DESCRIPTOR 1
 

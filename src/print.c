@@ -6,11 +6,12 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:20:53 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/21 23:59:48 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/22 14:05:49 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+#include <stdio.h>
 
 /* This f() prints out stacks a & b and the instruction stack to stdout */
 void	print_go_brrrrr(t_head *head)

@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/21 23:39:16 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/22 14:12:02 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ int	main(int argc, char **argv)
 		free_exit("", EXIT_FAILURE, head, NULL);
 	input_conversion(argc, argv, head);
 	assign_indeces(head);
+	if (increasing_subsequence(head->a) == lst_size(head->a)
+		&& lst_size(head->a) != 3)
+		free_exit("", EXIT_SUCCESS, head, NULL);
 	if (lst_size(head->a) <= 5)
 		sort_small(head);
 	else

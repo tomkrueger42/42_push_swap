@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:43:18 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/21 23:50:14 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/22 14:22:45 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	insert_node(int content, t_head *head)
 	head->a->content = content;
 }
 
-/* This f() frees the stack and puts an error message to FILE_DESCRIPTOR */
+/* This f() frees the stack and puts an error message to stderror */
 void	free_exit(char *errormsg, int exit_code, t_head *head, void *free_ptr)
 {
 	free_cdll(head->a);
@@ -65,7 +65,7 @@ void	free_exit(char *errormsg, int exit_code, t_head *head, void *free_ptr)
 		free(head);
 	if (free_ptr != NULL)
 		free(free_ptr);
-	ft_putstr_fd(errormsg, FILE_DESCRIPTOR);
+	ft_putstr_fd(errormsg, 2);
 	exit(exit_code);
 }
 
