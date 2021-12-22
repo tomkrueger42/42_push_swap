@@ -6,7 +6,7 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:38:17 by tkruger           #+#    #+#             */
-/*   Updated: 2021/12/21 17:28:59 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/21 23:39:16 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 	if (head == NULL)
 		return (0);
 	if (argc < 2)
-		free_exit("", EXIT_FAILURE, head);
+		free_exit("", EXIT_FAILURE, head, NULL);
 	input_conversion(argc, argv, head);
 	assign_indeces(head);
 	if (lst_size(head->a) <= 5)
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	else
 		(void)lis(head);
 	merge_to_stack_a(head);
-	free_exit("", EXIT_SUCCESS, head);
+	free_exit("", EXIT_SUCCESS, head, NULL);
 }
 
 /* This f() converts the char **argv into a stack and checks for errors */
@@ -47,7 +47,7 @@ void	input_conversion(int argc, char **argv, t_head *head)
 		if (ft_isint(input[i]))
 			insert_node(ft_atoi(input[i]), head);
 		else
-			free_exit("Error\n", EXIT_FAILURE, head);
+			free_exit("Error\n", EXIT_FAILURE, head, NULL);
 		i++;
 	}
 	i = 0;
@@ -82,7 +82,7 @@ void	assign_indeces(t_head *head)
 				lowest = parser;
 			else if (lowest != NULL && lowest->content == parser->content
 				&& parser->index == -1 && ALLOW_DOUBLES == 0)
-				free_exit("Error\n", EXIT_FAILURE, head);
+				free_exit("Error\n", EXIT_FAILURE, head, NULL);
 			parser = parser->next;
 			j++;
 		}
@@ -91,6 +91,7 @@ void	assign_indeces(t_head *head)
 	}
 }
 
+/* This f() sorts small stacks */
 void	sort_small(t_head *head)
 {
 	if (lst_size(head->a) == 3)
@@ -128,34 +129,4 @@ void	sort_three(t_head *head, bool weird_requirements)
 		swap('a', true, head);
 		swap('a', true, head);
 	}
-}
-
-/* This f() merges both stacks onto stack a sorted */
-void	merge_to_stack_a(t_head *head)
-{
-	t_node	*parser;
-	int		i;
-
-	while (head->b != NULL)
-	{
-		/* if (lst_size(head->a) <= 5)
-			printf("hello\n"); */
-		efficient_rotation(NULL, head->b, head->a, head);
-		push('a', true, head);
-	}
-	//print_go_brrrrr(head);
-	i = 0;
-	parser = head->a;
-	while (parser->prev->index < parser->index)
-	{
-		parser = parser->next;
-		i++;
-	}
-	if (i > lst_size(head->a) / 2)
-		i = -lst_size(head->a) + i;
-	while (i > 0 && i--)
-		rotate('a', true, head);
-	while (i < 0 && i++)
-		revrotate('a', true, head);
-	//print_go_brrrrr(head);
 }

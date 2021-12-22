@@ -6,7 +6,7 @@
 #    By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 14:28:19 by tkruger           #+#    #+#              #
-#    Updated: 2021/12/21 01:39:40 by tkruger          ###   ########.fr        #
+#    Updated: 2021/12/21 23:45:06 by tkruger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,8 @@ FLAGS = -Wall -Werror -Wextra -o
 #		SRC
 # **************************************************************************** #
 
-SRC = ./src/push_swap.c ./src/list_handling.c ./src/operations.c ./src/lis.c\
-		./src/efficient_rotation.c ./src/print.c
+SRC = ./src/push_swap.c ./src/operations.c ./src/operation_utils.c ./src/sort.c\
+		./src/efficient_rotation.c ./src/utils.c ./src/print.c
 
 # **************************************************************************** #
 #		Libs
@@ -33,7 +33,6 @@ LIBDIR = libs/libft
 LIB = -L./$(LIBDIR) -lft
 INC = -I./$(LIBDIR)
 # for LIB: either -l:libft.a or -lft same same
-# will have to copy libft into the intra repo for evaluation!!!
 
 # **************************************************************************** #
 #		rules

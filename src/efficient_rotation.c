@@ -6,161 +6,128 @@
 /*   By: tkruger <tkruger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:22:20 by tomkrueger        #+#    #+#             */
-/*   Updated: 2021/12/21 17:39:38 by tkruger          ###   ########.fr       */
+/*   Updated: 2021/12/22 01:05:15 by tkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
 /* This f() parses through the s stack and then calls best_rotate() */
-void	efficient_rotation(t_node *lis_start, t_node *s,
-	t_node *d, t_head *head)
+void	efficient_rotation(t_node *lis_start, t_node *src,
+	t_node *dst, t_head *head)
 {
 	t_rotation	*r;
-	t_rotation	*ben;
+	t_rotation	*bench;
 
 	r = ft_calloc(1, sizeof(t_rotation));
 	if (r == NULL)
-		free_exit("Error\n", EXIT_FAILURE, head);
-	ben = ft_calloc(1, sizeof(t_rotation));
-	if (ben == NULL)
+		free_exit("Error\n", EXIT_FAILURE, head, NULL);
+	bench = ft_calloc(1, sizeof(t_rotation));
+	if (bench == NULL)
+		free_exit("Error\n", EXIT_FAILURE, head, r);
+	bench->src = INT32_MAX;
+	bench->dst = INT32_MAX;
+	while (r->pos < lst_size(src))
 	{
-		free(r);
-		free_exit("Error\n", EXIT_FAILURE, head);
+		if (part_of_lis(lis_start, src) == 0)
+			calc_r(r, bench, src, dst);
+		r->pos++;
+		src = src->next;
 	}
-	ben->r_s = INT32_MAX;
-	ben->rr_s = INT32_MAX;
-	ben->x_s = INT32_MAX;
-	while (r->r_s < lst_size(s))
-	{
-		if (part_of_lis(lis_start, s) == 0)
-			set_r(r, ben, s, d);
-		r->r_s++;
-		s = s->next;
-	}
-	best_rotate(ben, s, head);
+	if (src == head->a)
+		best_rotate(bench, 'a', 'b', head);
+	else if (src == head->b)
+		best_rotate(bench, 'b', 'a', head);
 	free(r);
-	free(ben);
+	free(bench);
 }
 
-/* This f() sets and saves the minimum amount of rotations */
-void	set_r(t_rotation *r, t_rotation *ben, t_node *s, t_node *d)
+/* This f() calc and saves the minimum amount of rotations */
+void	calc_r(t_rotation *r, t_rotation *bench, t_node *src, t_node *dst)
 {
-	r->rr_s = 0;
-	if (r->r_s != 0)
-		r->rr_s = lst_size(s) - r->r_s;
-	r->r_d = find_right_position(s, d);
-	r->rr_d = 0;
-	if (r->r_d != 0)
-		r->rr_d = lst_size(d) - r->r_d;
-	if (r->r_s < r->rr_s)
-		r->x_s = r->r_s;
+	int	rota_src;
+	int	rota_dst;
+	int	revrota_src;
+	int	revrota_dst;
+
+	rota_src = r->pos;
+	rota_dst = find_right_position(src, dst);
+	revrota_src = lst_size(src) - rota_src;
+	revrota_dst = lst_size(dst) - rota_dst;
+	if (ft_max(2, rota_src, rota_dst) < ft_max(2, revrota_src, revrota_dst))
+	{
+		set_r(r, rota_src, rota_dst, false);
+	}
 	else
-		r->x_s = -r->rr_s;
-	if (r->r_d < r->rr_d)
-		r->x_d = r->r_d;
-	else
-		r->x_d = -r->rr_d;
-	benchmark(r, ben);
+	{
+		set_r(r, -revrota_src, -revrota_dst, false);
+	}
+	if (rota_src + revrota_dst < ft_max(2, ft_abs(r->src), ft_abs(r->dst)))
+		set_r(r, rota_src, -revrota_dst, true);
+	if (revrota_src + rota_dst < ft_max(2, ft_abs(r->src), ft_abs(r->dst)))
+		set_r(r, -revrota_src, rota_dst, true);
+	benchmark(r, bench);
 }
 
-void	benchmark(t_rotation *r, t_rotation *ben)
+/* This f() sets r's values */
+void	set_r(t_rotation *r, int r_src, int r_dst, bool r_x)
 {
-	if (ft_max(2, r->r_s, r->r_d) < ft_max(2, ben->r_s, ben->r_d))
-	{
-		ben->r_s = r->r_s;
-		ben->r_d = r->r_d;
-	}
-	if (ft_max(2, r->rr_s, r->rr_d) < ft_max(2, ben->rr_s, ben->rr_d))
-	{
-		ben->rr_s = r->rr_s;
-		ben->rr_d = r->rr_d;
-	}
-	if (ft_abs(r->x_s) + ft_abs(r->x_d) < ft_abs(ben->x_s) + ft_abs(ben->x_d))
-	{
-		ben->x_s = r->x_s;
-		ben->x_d = r->x_d;
-	}
+	r->src = r_src;
+	r->dst = r_dst;
+	r->x = r_x;
 }
 
-/* This f() executes the best rotation and calls others when needed */
-void	best_rotate(t_rotation *ben, t_node *s, t_head *head)
+/* This f() benchmarks the values of r and saves them accordingly */
+void	benchmark(t_rotation *r, t_rotation *bench)
 {
-	char	c;
-
-	if (ft_max(2, ben->r_s, ben->r_d) > ft_max(2, ben->rr_s, ben->rr_d))
-		return (best_revrotate(ben, s, head));
-	if (ft_max(2, ben->r_s, ben->r_d) > ft_abs(ben->x_s) + ft_abs(ben->x_d))
-		return (best_x_rotate(ben, s, head));
-	if (ben->r_s > ben->r_d)
-		c = s == head->a ? 'a' : 'b';
+	if (r->x == false && bench->x == false && ft_max(2, ft_abs(r->src),
+			ft_abs(r->dst)) < ft_max(2, ft_abs(bench->src), ft_abs(bench->dst)))
+	{
+		bench->x = false;
+	}
+	else if (r->x == false && bench->x == true && ft_max(2, ft_abs(r->src),
+			ft_abs(r->dst)) < ft_abs(bench->src) + ft_abs(bench->dst))
+	{
+		bench->x = false;
+	}
+	else if (r->x == true && bench->x == false
+		&& ft_abs(r->src) + ft_abs(r->dst)
+		< ft_max(2, ft_abs(bench->src), ft_abs(bench->dst)))
+	{
+		bench->x = true;
+	}
+	else if (r->x == true && bench->x == true && ft_abs(r->src) + ft_abs(r->dst)
+		< ft_abs(bench->src) + ft_abs(bench->dst))
+	{
+		bench->x = true;
+	}
 	else
-		c = s == head->a ? 'b' : 'a';
-	while (ft_min(2, ben->r_s, ben->r_d) > 0)
+		return ;
+	bench->src = r->src;
+	bench->dst = r->dst;
+}
+
+/* This f() executes the final benchmarks rotations */
+void	best_rotate(t_rotation *bench, char src, char dst, t_head *head)
+{
+	while (bench->x == false && ft_min(2, bench->src, bench->dst) > 0)
 	{
 		rotate('r', true, head);
-		ben->r_s--;
-		ben->r_d--;
+		bench->src--;
+		bench->dst--;
 	}
-	while (ft_max(2, ben->r_s, ben->r_d) > 0)
-	{
-		rotate(c, true, head);
-		ben->r_s--;
-		ben->r_d--;
-	}
-}
-
-/* This f() executes the best rev rotation and calls best_x_rotation when
-needed */
-void	best_revrotate(t_rotation *ben, t_node *s, t_head *head)
-{
-	char	c;
-
-	if (ft_max(2, ben->rr_s, ben->rr_d) > ft_abs(ben->x_s) + ft_abs(ben->x_d))
-		return (best_x_rotate(ben, s, head));
-	if (ben->rr_s > ben->rr_d)
-		c = s == head->a ? 'a' : 'b';
-	else
-		c = s == head->a ? 'b' : 'a';
-	while (ft_min(2, ben->rr_s, ben->rr_d) > 0)
+	while (bench->x == false && ft_min(2, bench->src, bench->dst) < 0)
 	{
 		revrotate('r', true, head);
-		ben->rr_s--;
-		ben->rr_d--;
+		bench->src++;
+		bench->dst++;
 	}
-	while (ft_max(2, ben->rr_s, ben->rr_d) > 0)
-	{
-		revrotate(c, true, head);
-		ben->rr_s--;
-		ben->rr_d--;
-	}
-}
-
-/* This f() executes the best cross-rotation */
-void	best_x_rotate(t_rotation *ben, t_node *s, t_head *head)
-{
-	char	c;
-
-	c = s == head->a ? 'a' : 'b';
-	while (ben->x_s > 0)
-	{
-		rotate(c, true, head);
-		ben->x_s--;
-	}
-	while (ben->x_s < 0)
-	{
-		revrotate(c, true, head);
-		ben->x_s++;
-	}
-	c = c == 'a' ? 'b' : 'a';
-	while (ben->x_d > 0)
-	{
-		rotate(c, true, head);
-		ben->x_d--;
-	}
-	while (ben->x_d < 0)
-	{
-		revrotate(c, true, head);
-		ben->x_d++;
-	}
+	while (bench->src > 0 && bench->src--)
+		rotate(src, true, head);
+	while (bench->dst > 0 && bench->dst--)
+		rotate(dst, true, head);
+	while (bench->src < 0 && bench->src++)
+		revrotate(src, true, head);
+	while (bench->dst < 0 && bench->dst++)
+		revrotate(dst, true, head);
 }
